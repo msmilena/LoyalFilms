@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Information</title>
+</head>
+<body>
+    {% for movie in movies %}
+        <div>
+            <h1>{{ movie.title }}</h1>
+            <p>Year: {{ movie.release_date }}</p>
+            <p>Overview: {{ movie.overview }}</p>
+
+            {% if movie.poster_path %}
+                <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="Movie Poster">
+            {% endif %}
+
+            <h2>Ratings:</h2>
+            <p>Popularity: {{ movie.popularity }}</p>
+            <p>Vote Average: {{ movie.vote_average }}</p>
+            <p>Vote Count: {{ movie.vote_count }}</p>
+            <hr>
+        </div>
+    {% endfor %}
+</body>
+</html>
