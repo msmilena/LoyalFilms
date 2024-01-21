@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MoviesGrid } from './Componentes/MoviesGrid';
+import { MoviesGrid } from './Componentes/MoviesGrid.jsx';
 function App() {
   const [movies, setMovies] = useState([]);
 
@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>Movie App</h1>
+        <h1>Movie Apzzzzzzzzzzp</h1>
       </header>
       <main>
         <MoviesGrid movies={movies} />
