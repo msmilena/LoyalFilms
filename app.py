@@ -1,15 +1,9 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, jsonify, redirect, url_for, request
 import requests
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, validators
 
-=======
-from flask import Flask, render_template, jsonify
-import requests
-
->>>>>>> 7b2e4eb0ce6b96ce534091d11c8ee889952939e5
 from flask_cors import CORS
 
 import firebase_admin
@@ -23,7 +17,6 @@ from firebase_admin import firestore
 # usuario = {"username": "Tokyo", "password": "50bb11b76", "isadmin": False}
 # update_time, usuario_ref = db.collection("usuario").add(usuario)
 # print(f"Added document with id {usuario_ref.id}")
-<<<<<<< HEAD
 class ResenaForm(FlaskForm):
     contenido = StringField('Contenido', validators=[validators.DataRequired(), validators.Length(min=1, max=1200)])
     fecha = DateField('Fecha', format='%Y-%m-%d', validators=[validators.DataRequired()])
@@ -31,15 +24,12 @@ class ResenaForm(FlaskForm):
     idusuario  = StringField('ID Usuario', validators=[validators.Optional(), validators.Length(max=255)])
 
 
-=======
      
->>>>>>> 7b2e4eb0ce6b96ce534091d11c8ee889952939e5
 
 app = Flask(__name__)
 CORS(app)
 
 api_key = 'eec91e51c2cbe9fd8e941f3bbc0fd811'
-<<<<<<< HEAD
 
 #RUTA PARA CREAR RESEÑA
 @app.route('/resena', methods=['POST'])
@@ -145,7 +135,6 @@ api_key = 'eec91e51c2cbe9fd8e941f3bbc0fd811'
 #     except Exception as e:
 #         # Manejo de errores
 #         return jsonify({"codigo": 500, "estado": "Error", "mensaje": str(e)}), 500
-=======
 #RUTA PARA CREAR RESEÑA
 @app.route('/resena', methods=['POST'])
 
@@ -155,7 +144,6 @@ api_key = 'eec91e51c2cbe9fd8e941f3bbc0fd811'
 #RUTA PARA EDITAR RESEÑA
 @app.route('/resena', methods=['UPDATE'])
 
->>>>>>> 7b2e4eb0ce6b96ce534091d11c8ee889952939e5
 
 #RUTA PARA OBTENER LA LISTA DE PELICULAS
 @app.route('/movies', methods=['GET'])
@@ -187,11 +175,6 @@ def read_movies():
 
     return jsonify(movies_info) 
 
-<<<<<<< HEAD
-
-#RUTA PREDETERMINADA
-=======
->>>>>>> 7b2e4eb0ce6b96ce534091d11c8ee889952939e5
 @app.route('/')
 def index():
     api_key = 'eec91e51c2cbe9fd8e941f3bbc0fd811'  # Replace with your TMDb API key
@@ -223,7 +206,6 @@ def index():
 
     return jsonify(movies_info)
 
-<<<<<<< HEAD
 
 @app.route('/prueba')
 def prueba():
@@ -240,7 +222,5 @@ def prueba():
     except requests.exceptions.RequestException as e:
         return jsonify({'error': f'Error fetching movie: {e}'}), 500
 
-=======
->>>>>>> 7b2e4eb0ce6b96ce534091d11c8ee889952939e5
 if __name__ == '__main__':
     app.run(debug=True)
