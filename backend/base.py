@@ -15,7 +15,7 @@ from firebase_admin import firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 from google.cloud.firestore_v1.base_query import FieldFilter, Or
 
-cred = credentials.Certificate("token/loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
+cred = credentials.Certificate(r"src\token\loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 class ResenaForm(FlaskForm):
@@ -179,3 +179,13 @@ def prueba():
 
 if __name__ == '_main_':
     app.run(debug=True)
+
+
+
+#   apiKey: "AIzaSyAneR4gmqKRbrtvSDHDew_8Hge_LwOVBMo",
+#   authDomain: "loyalfilsm.firebaseapp.com",
+#   projectId: "loyalfilsm",
+#   storageBucket: "loyalfilsm.appspot.com",
+#   messagingSenderId: "83024199519",
+#   appId: "1:83024199519:web:c15856394cc0484e1280ea",
+#   measurementId: "G-WRWN8947W8"

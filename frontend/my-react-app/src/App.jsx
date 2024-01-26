@@ -13,7 +13,7 @@ function App() {
   return (
     <div>
       <header>
-        <h1>Movie Apzzzzzzzzzzp</h1>
+        <h1>Movies Apps</h1>
       </header>
       <main>
         <MoviesGrid movies={movies} />

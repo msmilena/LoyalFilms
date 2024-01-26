@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogo de Películas</title>
+</head>
+
+<body>
+    <h1>Catalogo de Películas</h1>
+    <div id="catalogo"></div>
+    <div id="resenas"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Al cargar la página, verifica la autenticación y obtén el catálogo de películas
+            verificarAutenticacion();
+            obtenerCatalogoPeliculas();
+        });
+
+        function verificarAutenticacion() {
+            const token = localStorage.getItem('token'); // Recupera el token almacenado localmente
+            if (!token) {
+                // Redirige a la página de autenticación si no hay token
+                window.location.href = '/login';
+            }
+        }
+
+        function obtenerCatalogoPeliculas() {
+            const token = localStorage.getItem('token');
+            fetch('/movies', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Muestra el catálogo de películas en el DOM
+                    const catalogoDiv = document.getElementById('catalogo');
+                    catalogoDiv.innerHTML = '<h2>Populares</h2><br>';
+                    data.forEach(pelicula => {
+                        catalogoDiv.innerHTML += `<p>${pelicula.original_title} (${pelicula.release_date})</p><button onclick="verResenas()">Ver Reseñas</button><br><label>(${pelicula.overview})</label><br><br>`;
+                    });
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function verResenas() {
+            const token = localStorage.getItem('token');
+            const peliculaId = 'pelicula1'; // Reemplaza con el identificador de la película
+            fetch(`/resenas/${peliculaId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Muestra las reseñas en el DOM
+                    const resenasDiv = document.getElementById('resenas');
+                    resenasDiv.innerHTML = '<h2>Reseñas</h2><br>';
+                    data.forEach(resena => {
+                        const fecha = new Date(resena.fecha).toLocaleString();
+                        resenasDiv.innerHTML += `<p>${fecha}</p><p>${resena.contenido}</p>`;
+                        resenasDiv.innerHTML += `<button onclick="editarResena('${resena.id}')">Editar</button>`;
+                        resenasDiv.innerHTML += `<button onclick="eliminarResena('${resena.id}')">Eliminar</button><br><br>`;
+                    });
+
+                    // Campo para hacer una nueva reseña
+                    resenasDiv.innerHTML += '<h2>Nueva Reseña</h2>';
+                    resenasDiv.innerHTML += '<textarea id="nuevaResena" rows="4" cols="50"></textarea><br>';
+                    resenasDiv.innerHTML += '<button onclick="hacerNuevaResena()">Publicar Reseña</button>';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function editarResena(resenaId) {
+            // Utilizar prompt para obtener el nuevo contenido
+            const nuevoContenido = prompt('Ingrese el nuevo contenido de la reseña:', '');
+
+            if (nuevoContenido === null) {
+                // El usuario canceló la operación
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+
+            // Datos del formulario
+            const formData = new FormData();
+            formData.append('contenido', nuevoContenido);
+
+            // Configuración de la solicitud PUT (o POST si prefieres)
+            const requestOptions = {
+                method: 'PUT', // Puedes cambiar a 'POST' si prefieres
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            };
+
+            // Realizar la solicitud PUT (o POST si prefieres)
+            fetch(`/resenas/${resenaId}`, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Reseña editada:', data);
+                    // Recargar las reseñas después de editar una
+                    verResenas();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
+            // Lógica para editar la reseña con el ID proporcionado
+        }
+
+        function eliminarResena(idResena) {
+            const token = localStorage.getItem('token');
+
+            // Configuración de la solicitud DELETE
+            const requestOptions = {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            };
+
+            // Realizar la solicitud DELETE
+            fetch(`/resenas/${idResena}`, requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Reseña eliminada:', data);
+                    // Recargar las reseñas después de eliminar una
+                    verResenas();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            // Lógica para eliminar la reseña con el ID proporcionado
+        }
+
+        function hacerNuevaResena() {
+            const nuevaResena = document.getElementById('nuevaResena').value;
+            console.log(nuevaResena)
+            const token = localStorage.getItem('token');
+            const peliculaId = 'pelicula1'; // Reemplaza con el identificador de la película
+
+            // Datos del formulario
+            // Crear un objeto FormData y agregar campos
+            var formData = new FormData();
+            formData.append('contenido', nuevaResena);
+            formData.append('idpelicula', peliculaId);
+            formData.append('idusuario', 'usuario1');
+            // Configuración de la solicitud POST
+            const requestOptions = {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            };
+
+            // Realizar la solicitud POST
+            fetch('/resenas', requestOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Reseña creada:', data);
+                    // Recargar las reseñas después de crear una nueva
+                    verResenas();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import Resena from './Pages/Resena.js';
+import Login from './Pages/Login.js';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "resena",
     element: <Resena/>,
+  },
+  {
+    path: "login",
+    element: <Login/>,
   },
 ]);
 
