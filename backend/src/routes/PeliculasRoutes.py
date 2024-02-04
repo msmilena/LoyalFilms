@@ -12,9 +12,9 @@ main = Blueprint('movies_blueprint', __name__)
 
 @main.route('/', methods=['GET'])
 def get_movies():
-    has_access = Security.verify_token(request.headers)
+   # has_access = Security.verify_token(request.headers)
     #print(has_access)
-    if has_access:
+   # if has_access:
         try:
             movies = PeliculasService.get_movies()
             if (len(movies) > 0):
@@ -23,6 +23,6 @@ def get_movies():
                 return jsonify({'message': "NOTFOUND", 'success': True})
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
-    else:
-        response = jsonify({'message': 'Unauthorized'})
-        return response, 401
+    #else:
+       # response = jsonify({'message': 'Unauthorized'})
+       # return response, 401

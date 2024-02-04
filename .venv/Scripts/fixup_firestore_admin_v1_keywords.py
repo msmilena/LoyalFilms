@@ -1,4 +1,4 @@
-#!C:\Users\milena.mitac\Desktop\TallerWeb\.venv\Scripts\python.exe
+#!C:\Users\milena.mitac\Desktop\LoyalFilms\LoyalFilms\.venv\Scripts\python.exe
 # -*- coding: utf-8 -*-
 # Copyright 2023 Google LLC
 #

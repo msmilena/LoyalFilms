@@ -7,14 +7,16 @@ from src.utils.Security import Security
 # Services
 from src.services.AuthService import AuthService
 
+
 main = Blueprint('auth_blueprint', __name__)
 
 
 @main.route('/', methods=['POST'])
 def login():
-    #print("LOGIN RUTA")
-    username = request.form['username']
-    password = request.form['password']
+    print("LOGIN RUTA")
+    data = request.json  # Accede a los datos JSON en lugar de los datos del formulario
+    username = data.get('username')  # Ajusta el campo a 'username'
+    password = data.get('password')
 
     _user = User( username, password, None)
     authenticated_user = AuthService.login_user(_user)

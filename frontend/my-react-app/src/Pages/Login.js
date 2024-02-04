@@ -25,7 +25,7 @@ const Login = (props) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
+            username: email,
             password: password,
           }),
         });
@@ -33,11 +33,10 @@ const Login = (props) => {
         // Maneja la respuesta del servidor
         if (response.ok) {
           const data = await response.json();
-          console.log("Server response:", data);
           localStorage.setItem("token", data.token);
   
           // Redirige a otra página (puedes personalizarla según tus necesidades)
-          // navigate("/dashboard");
+          navigate("/");
         } else {
           // Maneja errores de la solicitud al servidor
           const errorData = await response.json();

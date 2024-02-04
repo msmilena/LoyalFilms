@@ -4,6 +4,7 @@ from flask import Blueprint, request, jsonify, render_template
 from src.services.models.User import User
 # Security
 from src.utils.Security import Security
+
 # Services
 
 main = Blueprint('static_blueprint', __name__)
@@ -18,3 +19,4 @@ def peliculas_static():
 @main.route('/resenas_pelicula')
 def resenas_static():
         return render_template(r"resenas.html")
+
