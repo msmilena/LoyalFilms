@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MoviesGrid } from '../Componentes/MoviesGrid.jsx';
 import Navbar from '../Componentes/NavBar.jsx';
-
+import Section from '../Componentes/Section.jsx';
 function HomePage() {
   const [movies, setMovies] = useState([]);
 
@@ -15,14 +15,14 @@ function HomePage() {
     //}
   });
 
-  function verificarAutenticacion() {
-    const token = localStorage.getItem('token');
-    if (!token) {
-        console.log("No hay token")
-      // Redirige a la página de autenticación si no hay token
-      window.location.href = '/login';
-    }
-  }
+  // function verificarAutenticacion() {
+  //   const token = localStorage.getItem('token');
+  //   if (!token) {
+  //       console.log("No hay token")
+  //     // Redirige a la página de autenticación si no hay token
+  //     window.location.href = '/login';
+  //   }
+  // }
 
   function obtenerCatalogoPeliculas() {
     const token = localStorage.getItem('token');
@@ -46,6 +46,8 @@ function HomePage() {
       </header>
       <main>
         <MoviesGrid movies={movies} />
+        <Section sectionName="Tendencias" />
+        <Section sectionName="Nuevos" />
       </main>
     </div>
   );
