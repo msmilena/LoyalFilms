@@ -1,42 +1,56 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as RouterLink} from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../img/Logo.png';
+import './NavBar.css';
 
 const Navbar = () => {
   const isLoggedIn = !!localStorage.getItem('token');
 
+  const[click, setClick] = useState(false);
+  const handleClick = () => setClick(!click);
+  const closeMenu = () => setClick(false);
+
   const handleLogout = () => {
-    // Puedes agregar lógica de logout aquí, como limpiar el token en localStorage
     localStorage.removeItem('token');
-    // Redirige a la página de login después del logout
     window.location.href = '/';
   };
 
   return (
     <nav>
       <img src={logo} alt="Logo" />
-      <ul>
+      <div className="hamburger" onClick={handleClick}>
+      {click ? (<FaTimes size={30} style={{ color: '#444444' }} />)
+                        : (<FaBars size={30} style={{ color: '#444444' }} />)}
+      </div>
+      <ul className={click ? "navbar-menu active" : "navbar-menu"}>
         <li>
-          <RouterLink to="/">Inicio</RouterLink>
+          <RouterLink to="/" onClick={closeMenu}>Inicio</RouterLink>
         </li>
         <li>
-          <ScrollLink to="Tendencias" smooth={true} duration={500}>Tendencias</ScrollLink>
+          <ScrollLink to="Tendencias" onClick={closeMenu}
+          smooth={true} duration={500} spy={true} hashSpy={true}
+          exact='true' offset={50}
+          >Tendencias</ScrollLink>
         </li>
 
-        <li>
-          <ScrollLink to="Nuevos" smooth={true} duration={500}>Nuevos</ScrollLink>
+        <li> 
+        <ScrollLink to="Nuevos" onClick={closeMenu}
+          smooth={true} duration={500} spy={true} hashSpy={true}
+          exact='true' offset={50}
+          >Nuevos</ScrollLink>
         </li>
 
         {!isLoggedIn && (
-          <li>
-            <RouterLink to="/login">Login</RouterLink>
+          <li> 
+            <RouterLink to="/login" onClick={closeMenu}>Login</RouterLink>
           </li>
         )}
 
         {isLoggedIn && (
           <li>
-            <RouterLink  onClick={handleLogout}>Logout</RouterLink>
+            <RouterLink onClick={handleLogout}>Logout</RouterLink>
           </li>
         )}
       </ul>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { MoviesGrid } from '../Componentes/MoviesGrid.jsx';
 import Navbar from '../Componentes/NavBar.jsx';
 import Section from '../Componentes/Section.jsx';
+
 function HomePage() {
   const [movies, setMovies] = useState([]);
 
@@ -41,11 +41,10 @@ function HomePage() {
   return (
     <div>
       <header>
-        <h1>Movies Apps</h1>
         <Navbar />
       </header>
       <main>
-        <MoviesGrid movies={movies} />
+
         <Section sectionName="Tendencias" />
         <Section sectionName="Nuevos" />
       </main>

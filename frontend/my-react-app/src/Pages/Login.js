@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../Componentes/NavBar.jsx';
 
 const Login = (props) => {
     const [email, setEmail] = useState("")
@@ -48,7 +49,12 @@ const Login = (props) => {
       }
     }
 
-    return <div className={"mainContainer"}>
+    return (
+      
+    <div className={"mainContainer"}>
+      <header>
+      <Navbar />
+    </header>
         <div className={"titleContainer"}>
             <div>Login</div>
         </div>
@@ -78,7 +84,7 @@ const Login = (props) => {
                 onClick={onButtonClick}
                 value={"Log in"} />
         </div>
-    </div>
+    </div>);
 }
 
 export default Login
