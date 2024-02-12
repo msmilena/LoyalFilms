@@ -20,10 +20,10 @@ const Navbar = () => {
   return (
     <nav>
       <img src={logo} alt="Logo" />
-      <div className="hamburger" onClick={handleClick}>
-      {click ? (<FaTimes size={30} style={{ color: '#444444' }} />)
-                        : (<FaBars size={30} style={{ color: '#444444' }} />)}
-      </div>
+      <button className="hamburger" onClick={handleClick}>
+        {click ? (<FaTimes size={30} style={{ color: '#444444' }} />)
+          : (<FaBars size={30} style={{ color: '#444444' }} />)}
+      </button>
       <ul className={click ? "navbar-menu active" : "navbar-menu"}>
         <li>
           <RouterLink to="/" onClick={closeMenu}>Inicio</RouterLink>

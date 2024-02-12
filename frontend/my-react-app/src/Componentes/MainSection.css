@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+
+.main-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .main-section__img {
+    max-width: 60%;
+    height: auto;
+  }
+
+  .main-section__img img{
+    width: 70%;
+  }
+  
+  .main-section__text {
+    font-family: 'Inter', sans-serif;
+    width: 40%;
+    padding: 0 0 0 6.5vw; 
+  }
+  
+  .main-section__text__title__black {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5vw; 
+    color: #030303;
+  }
+
+  .main-section__text__title__color {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 6vw; 
+    background: #2203FF;
+    background: linear-gradient(to right, #2203FF 0%, #C40D60 20%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
