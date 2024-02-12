@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
 import { MoviesGrid } from './MoviesGrid';
+import Fuego from '../img/Fuego.png';
+import './Section.css';
 const Section = ({ sectionName }) => {
 
     const [movies, setMovies] = useState([]);
@@ -26,7 +27,13 @@ const Section = ({ sectionName }) => {
       }
   return (
     <Element name={sectionName} className="section">
-      <h2>{sectionName}</h2>
+      <div className="section-header">
+        <div className='contenedor-img'>
+          <img src={Fuego} alt="Fuego" />
+        </div>
+        <h2>{sectionName}</h2>
+      </div>
+      
         <MoviesGrid movies={movies} />
     </Element>
   );

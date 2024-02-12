@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Componentes/NavBar.jsx';
 import Section from '../Componentes/Section.jsx';
 import MainSection from '../Componentes/MainSection.jsx';
+import Footer from '../Componentes/Footer.jsx';
 import '../Componentes/Homepage.css';
 
 function HomePage() {
@@ -34,6 +35,7 @@ function HomePage() {
         <MainSection />
         <Section sectionName="Tendencias" />
         <Section sectionName="Nuevos" />
+        <Footer />
       </main>
     </div>
   );

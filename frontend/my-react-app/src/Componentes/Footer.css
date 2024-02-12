@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+footer {
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    width: 100%;
+    margin: 10vh 0 10vh 0;
+}
+
+img {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    height: auto; /* Permite que la altura se ajuste automáticamente según las proporciones de la imagen */
+    display: block; /* Elimina espacios en blanco adicionales debajo de la imagen */
+}
+
+.contenido-footer {
+    position: absolute;
+    top: 0; /* Ajusta la posición verticalmente según tus necesidades */
+    left: 70%; /* Centra horizontalmente */
+}
+
+.botones{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 80px;
+   
+}
+
+.botones li a,
+.botones li{
+    list-style: none;
+    text-decoration: none;
+    color: #444444;
+    font-size: 18px;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+}
+
+.botones li a:hover{
+    color: #C40E61
+}
+

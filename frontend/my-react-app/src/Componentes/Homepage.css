@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 
-*{
+*{  
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 main{
-    margin-top: 16vh;
-    padding: 0 3vw 0 3vw;
+    margin-top: 60px;
+    padding: 0 4.5vw 0 4.5vw;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    flex-wrap: wrap;
+    
 }

@@ -5,6 +5,7 @@
 .main-section {
     display: flex;
     align-items: center;
+    padding: 5vh 0 5vh 0;
   }
   
   .main-section__img {
@@ -13,13 +14,13 @@
   }
 
   .main-section__img img{
-    width: 70%;
+    width: 100%;
   }
   
   .main-section__text {
     font-family: 'Inter', sans-serif;
     width: 40%;
-    padding: 0 0 0 6.5vw; 
+    padding: 0 0 0 4vw; 
   }
   
   .main-section__text__title__black {
@@ -32,7 +33,7 @@
     font-family: 'Bebas Neue', sans-serif;
     font-size: 6vw; 
     background: #2203FF;
-    background: linear-gradient(to right, #2203FF 0%, #C40D60 20%);
+    background: linear-gradient(to right, #2203FF 0%, #C40D60 80%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }

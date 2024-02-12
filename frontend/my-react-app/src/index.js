@@ -4,6 +4,7 @@ import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import Resena from './Pages/Resena.js';
 import Login from './Pages/Login.js';
+import Registro from './Pages/Registro.js';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login/>,
+  },
+  {
+    path: "registro",
+    element: <Registro/>,
   },
 ]);
 

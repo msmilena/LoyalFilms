@@ -3,6 +3,8 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link as RouterLink} from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../img/Logo.png';
+import { LuUser2 as User } from "react-icons/lu";
+import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
 import './NavBar.css';
 
 const Navbar = () => {
@@ -42,9 +44,35 @@ const Navbar = () => {
           >Nuevos</ScrollLink>
         </li>
 
+        <li>
+          <div className="dropdown">
+            <div className='contenedorbtn'>
+            <button className="dropbtn">Géneros</button>
+            <IoIosArrowDown className="arrow-icon" style={{marginLeft: '10px'}}/>
+            </div>
+            <div className="dropdown-content">
+              <a href="#">Acción</a>
+              <a href="#">Aventura</a>
+              <a href="#">Comedia</a>
+              <a href="#">Drama</a>
+              <a href="#">Suspenso</a>
+            </div>
+          </div>
+        </li>
+
+        <li>
+        <div className="search-container">
+          <IoIosSearch className="search-icon" />
+          <input type="text" placeholder="Buscar una película" />
+        </div>
+
+
+        </li>
+
         {!isLoggedIn && (
-          <li> 
-            <RouterLink to="/login" onClick={closeMenu}>Login</RouterLink>
+          <li style={{ display: 'flex', alignItems: 'stretch'}}> 
+             <User size={20} style={{ color: '#C40E61', marginRight: '5px'  }} />
+            <RouterLink to="/login" onClick={closeMenu} style={{color: '#C40E61'}}>Iniciar Sesión</RouterLink>
           </li>
         )}
 
