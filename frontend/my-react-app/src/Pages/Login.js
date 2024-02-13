@@ -55,7 +55,10 @@ const Login = (props) => {
       <header>
       <Navbar />
     </header>
-        <div className={"titleContainer"}>
+
+      <main style={{marginTop: '100px'}}>
+
+      <div className={"titleContainer"}>
             <div>Login</div>
         </div>
         <br />
@@ -84,6 +87,8 @@ const Login = (props) => {
                 onClick={onButtonClick}
                 value={"Log in"} />
         </div>
+      </main>
+        
     </div>);
 }
 

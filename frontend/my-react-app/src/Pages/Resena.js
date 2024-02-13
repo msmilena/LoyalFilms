@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import { React,useState, useEffect } from 'react';
 import { MovieCard } from "../Componentes/MovieCard.jsx";
 import  ReviewList  from "../Componentes/ReviewList.jsx";
 function Resena(props) {

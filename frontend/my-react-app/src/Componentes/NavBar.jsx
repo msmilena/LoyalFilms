@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Link as RouterLink} from 'react-router-dom';
+import { Navigate, Link as RouterLink,  useNavigate} from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../img/Logo.png';
 import { LuUser2 as User } from "react-icons/lu";
@@ -17,6 +17,15 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     window.location.href = '/';
+  };
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    console.log("searchTerm:", searchTerm);
+    // Redirigir a la página de resultados de búsqueda con la palabra clave ingresada
+    navigate(`/resultados/${searchTerm}`);
   };
 
   return (
@@ -62,8 +71,19 @@ const Navbar = () => {
 
         <li>
         <div className="search-container">
-          <IoIosSearch className="search-icon" />
-          <input type="text" placeholder="Buscar una película" />
+          <IoIosSearch className="search-icon" onClick={handleSearch} />
+          <input
+            type="text"
+            placeholder="Buscar una película"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          {/* <button onClick={handleSearch}>Buscar</button> */}
         </div>
 
 
