@@ -6,15 +6,19 @@ import Footer from '../Componentes/Footer.jsx';
 import '../Componentes/Homepage.css';
 
 function HomePage() {
-  const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-      obtenerCatalogoPeliculas();
-  });
+    obtenerNuevasPeliculas();
+    obtenerTendencias();
+  }, []);
 
-  function obtenerCatalogoPeliculas() {
+  const [NuevasPeliculas, setNuevasPeliculas] = useState([]);
+
+  const [Tendencias, setTendencias] = useState([]);
+  
+  function obtenerNuevasPeliculas() {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:5000/movies', {
+    fetch('http://localhost:5000/movies/nuevas', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -22,9 +26,26 @@ function HomePage() {
     })
 
       .then(response => response.json())
-      .then(data => setMovies(data))
+      .then(data => setNuevasPeliculas(data))
       .catch(error => console.error('Error fetching movies:', error));
   }
+
+
+  function obtenerTendencias() {
+    const token = localStorage.getItem('token');
+    fetch('http://localhost:5000/movies/tendencias', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+      .then(response => response.json())
+      .then(data => setTendencias(data))
+      .catch(error => console.error('Error fetching movies:', error));
+  }
+
+
 
   return (
     <div>
@@ -33,8 +54,8 @@ function HomePage() {
       </header>
       <main>
         <MainSection />
-        <Section sectionName="Tendencias" />
-        <Section sectionName="Nuevos" />
+        <Section sectionName="Tendencias" movies={Tendencias} limit={8}/>
+        <Section sectionName="Nuevos" movies={NuevasPeliculas} limit={8}/>
         <Footer />
       </main>
     </div>

@@ -77,3 +77,36 @@ class PeliculasService():
         
         except CustomException as ex:
             raise CustomException(ex)
+        
+    @classmethod
+    def get_nuevas_peliculas(cls):
+        try:
+            url = "https://api.themoviedb.org/3/movie/now_playing"
+            
+            params = {
+                "language": "es",
+                "page": 1,
+                
+                "api_key": api_key  
+            }
+
+            try:
+                response = requests.get(url, params=params)
+                response.raise_for_status()  # Raise an exception for HTTP errors
+                data = response.json()
+                
+                # Check if the response contains the expected information
+                if 'results' in data:
+                    movies_info = data['results']
+                else:
+                    # If the response does not contain the expected information, set movies_info as an empty list
+                    movies_info = []
+            except requests.exceptions.RequestException as e:
+                # Handle any request error, such as a failed connection
+                print(f"Error in the request: {e}")
+                movies_info = []
+
+            return movies_info 
+        
+        except CustomException as ex:
+            raise CustomException(ex)

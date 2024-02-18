@@ -10,7 +10,7 @@ from src.services.PeliculasService import PeliculasService
 main = Blueprint('movies_blueprint', __name__)
 
 
-@main.route('/', methods=['GET'])
+@main.route('/tendencias', methods=['GET'])
 def get_movies():
    # has_access = Security.verify_token(request.headers)
     #print(has_access)
@@ -44,5 +44,16 @@ def buscar_pelicula():
             return jsonify(movies)
         else:
             return jsonify({'message': "No se encontraron resultados", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
+    
+@main.route('/nuevas', methods=['GET'])
+def get_nuevas_peliculas():
+    try:
+        movies = PeliculasService.get_nuevas_peliculas()
+        if (len(movies) > 0):
+            return jsonify(movies)
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})

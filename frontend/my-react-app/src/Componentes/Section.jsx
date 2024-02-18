@@ -1,30 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Element } from 'react-scroll';
 import { MoviesGrid } from './MoviesGrid';
 import Fuego from '../img/Fuego.png';
 import './Section.css';
-const Section = ({ sectionName }) => {
-
-    const [movies, setMovies] = useState([]);
-
-    useEffect(() => {
-          obtenerCatalogoPeliculas();
-      });
-    
-      function obtenerCatalogoPeliculas() {
-        const token = localStorage.getItem('token');
-        fetch('http://localhost:5000/movies', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-    
-          .then(response => response.json())
-          .then(data => setMovies(data))
-          .catch(error => console.error('Error fetching movies:', error));
-      }
+const Section = ({ sectionName, movies, limit}) => {
+  const limitedMovies = limit? movies.slice(0, limit): movies;
   return (
     <Element name={sectionName} className="section">
       <div className="section-header">
@@ -34,13 +15,15 @@ const Section = ({ sectionName }) => {
         <h2>{sectionName}</h2>
       </div>
       
-        <MoviesGrid movies={movies} />
+        <MoviesGrid movies={limitedMovies} />
     </Element>
   );
 };
 
 Section.propTypes = {
   sectionName: PropTypes.string.isRequired,
+  movies: PropTypes.array.isRequired,
+  limit: PropTypes.number,
 };
 
 export default Section;

@@ -8,9 +8,9 @@ const Footer = () => {
     <footer>
         <img src={Fondo} alt="fondo" />
 
-      <div class="contenido-footer">
+      <div className="contenido-footer">
      
-            <ul class="botones">
+            <ul className="botones">
                 <li>
                     <RouterLink to="/">Inicio</RouterLink>
                 </li>
