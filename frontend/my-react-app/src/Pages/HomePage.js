@@ -3,6 +3,7 @@ import Navbar from '../Componentes/NavBar.jsx';
 import Section from '../Componentes/Section.jsx';
 import MainSection from '../Componentes/MainSection.jsx';
 import Footer from '../Componentes/Footer.jsx';
+import Login from '../Pages/Login.js';
 import '../Componentes/Homepage.css';
 
 function HomePage() {
@@ -16,6 +17,8 @@ function HomePage() {
 
   const [Tendencias, setTendencias] = useState([]);
   
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
   function obtenerNuevasPeliculas() {
     const token = localStorage.getItem('token');
     fetch('http://localhost:5000/movies/nuevas', {
@@ -48,15 +51,20 @@ function HomePage() {
 
 
   return (
-    <div>
+    <div className={`homePage ${showLoginPopup ? 'popupActive' : ''}`}>
+      {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} />}
+
       <header>
-        <Navbar />
+        <Navbar showLoginPopup={showLoginPopup} setShowLoginPopup={setShowLoginPopup}/>
       </header>
       <main>
-        <MainSection />
-        <Section sectionName="Tendencias" movies={Tendencias} limit={8}/>
-        <Section sectionName="Nuevos" movies={NuevasPeliculas} limit={8}/>
-        <Footer />
+        
+        <div className={showLoginPopup ? 'blocked-content' : ''}>
+          <MainSection />
+          <Section sectionName="Tendencias" movies={Tendencias} limit={8}/>
+          <Section sectionName="Nuevos" movies={NuevasPeliculas} limit={8}/>
+          <Footer />
+        </div>
       </main>
     </div>
   );

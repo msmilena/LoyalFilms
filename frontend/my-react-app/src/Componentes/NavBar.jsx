@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { Navigate, Link as RouterLink,  useNavigate} from 'react-router-dom';
+import { Link as RouterLink,  useNavigate} from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import logo from '../img/Logo.png';
 import { LuUser2 as User } from "react-icons/lu";
 import { IoIosSearch, IoIosArrowDown } from "react-icons/io";
 import './NavBar.css';
 
-const Navbar = () => {
+const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
   const isLoggedIn = !!localStorage.getItem('token');
 
   const[click, setClick] = useState(false);
@@ -83,7 +83,6 @@ const Navbar = () => {
               }
             }}
           />
-          {/* <button onClick={handleSearch}>Buscar</button> */}
         </div>
 
 
@@ -91,18 +90,22 @@ const Navbar = () => {
 
         {!isLoggedIn && (
           <li style={{ display: 'flex', alignItems: 'stretch'}}> 
-             <User size={20} style={{ color: '#C40E61', marginRight: '5px'  }} />
-            <RouterLink to="/login" onClick={closeMenu} style={{color: '#C40E61'}}>Iniciar Sesión</RouterLink>
-          </li>
+          <User size={20} style={{ color: '#C40E61', marginRight: '5px'  }} />
+          <button className="abrirLogin" onClick={() => setShowLoginPopup(true)} style={{color: '#C40E61'}}>Iniciar Sesión</button>
+        </li>
+
         )}
 
         {isLoggedIn && (
           <li>
-            <RouterLink onClick={handleLogout}>Logout</RouterLink>
+            <RouterLink onClick={handleLogout}>Cerrar Sesión</RouterLink>
           </li>
         )}
       </ul>
     </nav>
+
+  
+    
 
   );
 };

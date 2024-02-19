@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.popUpContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 10px 25px 25px 25px;
+    border: 1px solid #ccc;
+    z-index: 99999; /* Set a higher value to display above all content */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between   ;
+    font-family: 'Inter', sans-serif;
+    color: #3B3B3B;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.06);
+    border-radius: 18px;
+    width: 500px;
+}
+
+.warningLabel{
+    color: #F92323;
+    font-size: 14px;
+    margin: 1vh 0 1vh 0;
+    display: flex;
+    justify-content: center;
+}
+
+.errorLabel{
+    color: #F92323;
+    font-size: 14px;
+    margin: 1vh 0 1vh 0;
+}
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    margin: 5vh 0 3vh 0;
+}
+
+.Logo{
+    max-width:100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.closeButton{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.titleContainer{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    margin: 1vh;
+}
+
+.inputContainer{
+    background-color: #F6F4FF;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 1vh 0 2vh 0;
+}
+
+.subtitulo{
+    margin: 1vh 0 1vh 0;
+}
+
+.opciones{
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 0 1vh 0;
+}
+
+.texto a{
+    text-decoration: underline;
+    color: #C40E61;
+    margin-left: 10px;
+}
+
+.ingresarButton{
+    background-color: #C40E61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 2vh 0 1vh 0;
+    cursor: pointer;
+}
