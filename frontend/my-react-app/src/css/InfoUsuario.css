@@ -1,0 +1,49 @@
+
+.mainPerfil {
+    width: 100%;
+    margin:0
+}
+
+.navPerfil {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20vh;
+    width:75vw;
+    /*max-width:1000px;*/
+    min-width:320px;
+    /*margin:auto;*/
+}
+
+.imgPerfil {
+    width: 25%;
+    border-radius: 50%;
+}
+
+.nombrePerfil {
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    color: rgb(196, 14, 97);
+    font-weight: 700;
+    /* transition-duration: initial; */
+    transition: 0.3s ease-in-out;
+    margin-inline: 30px;
+}
+
+.btnEditarPerfil {
+    padding: 10px 20px;
+    background-color: rgb(196, 14, 97);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+}
+    .btnEditarPerfil:hover {
+        background-color: rgb(168, 12, 82);
+    }
+
+    .btnEditarPerfil:active {
+        background-color: rgb(168, 12, 82);
+    }

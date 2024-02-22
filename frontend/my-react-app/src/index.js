@@ -6,6 +6,7 @@ import Resena from './Pages/Resena.js';
 import Login from './Pages/Login.js';
 import Registro from './Pages/Registro.js';
 import Resultados from './Pages/Resultados.js';
+import InfoUsuario from './Pages/InfoUsuario.js';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -31,7 +32,11 @@ const router = createBrowserRouter([
   {
     path: "resultados/:palabra",
     element: <Resultados/>,
-  }
+   },
+   {
+        path: "informacionUsuario",
+       element: <InfoUsuario/>,
+   }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
