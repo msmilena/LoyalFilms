@@ -5,7 +5,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoIosWarning } from "react-icons/io";
 import logosimbolo from "../img/LogoSimbolo.png";
 
-const Login = ({ onClose }) => {
+const Login = ({ onClose, onRegisterClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -118,7 +118,7 @@ const Login = ({ onClose }) => {
             
             <div
               className="texto">¿No tienes una cuenta?
-              <a href="#" className="texto">Regístrate</a>
+              <a href="#" className="texto" onClick={onRegisterClick}>Regístrate</a>
             </div>
             
         </div>
