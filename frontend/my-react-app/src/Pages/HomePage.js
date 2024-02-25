@@ -63,7 +63,7 @@ function HomePage() {
           <MainSection />
           <Section sectionName="Tendencias" movies={Tendencias} limit={8}/>
           <Section sectionName="Nuevos" movies={NuevasPeliculas} limit={8}/>
-          <Footer />
+          <Footer showLoginPopup={showLoginPopup} setShowLoginPopup={setShowLoginPopup}/>
         </div>
       </main>
     </div>

@@ -24,9 +24,13 @@ img {
     align-items: center;
     justify-content: space-around;
     gap: 80px;
-   
 }
 
+button.abrirLogin{
+    font-family: 'Inter', sans-serif;
+}
+
+.botones li button,
 .botones li a,
 .botones li{
     list-style: none;
@@ -37,7 +41,9 @@ img {
     transition: 0.3s ease-in-out;
 }
 
-.botones li a:hover{
+.botones li a:hover,
+.botones li button:hover,
+.botones li:hover{
     color: #C40E61
 }
 
