@@ -1,22 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 main h2 {
-    font-family: 'Inter', sans-serif;
-    padding: 20px;
-    text-align: center;
-    font-size: 1.3em;
-    display: flex;
-    width: 100%;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.3em;
+  display: flex;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  padding: 20px;
+  text-align: center;
+  font-size: 1.3em;
+  font-weight: light;
+  display: flex;
 }
 
 .MovieCard_movieCard__F61WL h2 {
-    font-size: 18px !important;
-    padding: 10px !important;
+  font-size: 18px !important;
+  padding: 10px !important;
 }
 
 span {
-    display: inline-block;
-    /*z-index: 1;*/
-    margin-right:10px;
-    font-size: clamp(0.7em,2.5vw,1em)
+  display: inline-block;
+  /*z-index: 1;*/
+  margin-right: 10px;
+  font-size: clamp(0.7em, 2.5vw, 1em)
+}
+
+
+.loader-page {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
 }

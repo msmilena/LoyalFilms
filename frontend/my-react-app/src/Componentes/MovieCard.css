@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.movieCard{
+    font-family: 'Inter', sans-serif;
+    list-style: none;
+    flex-direction: column;
+}
+
+.movieImage{
+    border-radius: 10px;
+    background-color: azure;
+    width: auto;
+    height: 321px;
+}
+
+.detalles{
+    padding: 10px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    margin-top: -20%;
+}
+
+.titulo{
+    font-weight:600;
+    color: #030303;
+    font-size: 1.2rem;
+}
+
+.year{
+    font-weight: normal;
+    color: #3B3B3B;
+    font-size: 1rem;;
+}
+
+.rating{
+    position: relative;
+    width: 63px;
+    z-index: 1;
+    left: 75%;
+    bottom: 10%; /* Adjust the value based on the title's font-size */
+}
+
+CircularProgressbar{
+    width: 100%;
+}
+
+@keyframes ratingAnimation {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+  
+
+@media (max-width: 560px){
+    .movieImage{
+        width: 90%;
+        height: auto;
+    }
+}
