@@ -8,3 +8,20 @@ main h2 {
   font-weight: light;
   display: flex;
 }
+
+.loader-page{
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+

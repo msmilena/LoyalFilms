@@ -3,7 +3,7 @@ import '../Componentes/Footer.css';
 import Fondo from '../img/Fondo.png';
 import { Link as RouterLink} from 'react-router-dom';
 
-const Footer = ({ showLoginPopup, setShowLoginPopup }) => {
+const Footer = ({ showLoginPopup, setShowLoginPopup, onRegisterClick }) => {
     const isLoggedIn = !!localStorage.getItem('token');
     const handleLogout = () => {
       localStorage.removeItem('token');
@@ -21,7 +21,7 @@ const Footer = ({ showLoginPopup, setShowLoginPopup }) => {
                     <RouterLink to="/">Inicio</RouterLink>
                 </li>
                 <li>
-                    <RouterLink to="/register">Regístrate</RouterLink>
+                <a href="#" className="" onClick={onRegisterClick}>Regístrate</a>
                 </li>
 
                 {!isLoggedIn && (

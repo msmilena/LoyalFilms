@@ -1,0 +1,33 @@
+.botones-navegacion{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.botones-navegacion button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ca2b72;
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.botones-navegacion button:hover{
+    background-color: #8A0A4F;
+}
+
+.botones-navegacion button.current-page{
+    background-color: #8A0A4F;
+}
