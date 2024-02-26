@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Componentes/Login.css";
-import { IoIosCloseCircleOutline } from "react-icons/io";
-import { IoIosWarning } from "react-icons/io";
+import { IoIosCloseCircleOutline,IoIosWarning } from "react-icons/io";
+
 import logosimbolo from "../img/LogoSimbolo.png";
 
-const Login = ({ onClose }) => {
+const Login = ({ onClose, onRegisterClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -18,7 +18,7 @@ const Login = ({ onClose }) => {
     // Validación básica (puedes personalizarla según tus necesidades)
     if (!email || !password) {
       setEmailError("Ingrese Usuario");
-      setPasswordError("Ingrese Contraseña");
+      setPasswordError("Ingrese Contraseña'");
       setShowWarning(true); // Show warning if email or password is empty
       return;
     }
@@ -118,7 +118,7 @@ const Login = ({ onClose }) => {
             
             <div
               className="texto">¿No tienes una cuenta?
-              <a href="#" className="texto">Regístrate</a>
+              <a href="#" className="texto" onClick={onRegisterClick}>Regístrate</a>
             </div>
             
         </div>

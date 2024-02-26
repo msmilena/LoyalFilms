@@ -4,7 +4,7 @@ import App from './App.jsx';
 import reportWebVitals from './reportWebVitals';
 import Resena from './Pages/Resena.js';
 import Login from './Pages/Login.js';
-import Registro from './Pages/Registro.js';
+import Registro from './Pages/Register.js';
 import Resultados from './Pages/Resultados.js';
 import InfoUsuario from './Pages/InfoUsuario.js';
 import {

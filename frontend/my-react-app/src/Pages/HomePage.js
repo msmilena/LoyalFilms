@@ -4,6 +4,7 @@ import Section from '../Componentes/Section.jsx';
 import MainSection from '../Componentes/MainSection.jsx';
 import Footer from '../Componentes/Footer.jsx';
 import Login from '../Pages/Login.js';
+import Register from './Register.js';
 import '../Componentes/Homepage.css';
 
 function HomePage() {
@@ -18,6 +19,8 @@ function HomePage() {
   const [Tendencias, setTendencias] = useState([]);
   
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
 
   function obtenerNuevasPeliculas() {
     const token = localStorage.getItem('token');
@@ -52,8 +55,9 @@ function HomePage() {
 
   return (
     <div className={`homePage ${showLoginPopup ? 'popupActive' : ''}`}>
-      {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} />}
-
+      {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} onRegisterClick={() => {setShowRegisterPopup(true); setShowLoginPopup(false); }} />} {/* Modifica el componente de Login para manejar el clic en el enlace de registro */}
+      {showRegisterPopup && <Register onCloseRegister={() => setShowRegisterPopup(false)} onLoginClick={()=>{setShowLoginPopup(true); setShowRegisterPopup(false);}}/>} {/* Muestra el componente de registro si showRegisterPopup es true */}
+      
       <header>
         <Navbar showLoginPopup={showLoginPopup} setShowLoginPopup={setShowLoginPopup}/>
       </header>
@@ -63,7 +67,7 @@ function HomePage() {
           <MainSection />
           <Section sectionName="Tendencias" movies={Tendencias} limit={8}/>
           <Section sectionName="Nuevos" movies={NuevasPeliculas} limit={8}/>
-          <Footer />
+          <Footer showLoginPopup={showLoginPopup} setShowLoginPopup={setShowLoginPopup}/>
         </div>
       </main>
     </div>
