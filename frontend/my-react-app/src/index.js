@@ -7,6 +7,7 @@ import Login from './Pages/Login.js';
 import Registro from './Pages/Register.js';
 import Resultados from './Pages/Resultados.js';
 import InfoUsuario from './Pages/InfoUsuario.js';
+import Perfil from './Pages/Perfil.js';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
    {
         path: "informacionUsuario",
        element: <InfoUsuario/>,
-   }
+    },
+    {
+        path: "perfil",
+        element: <Perfil />,
+    }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -12,7 +12,7 @@ const Section = ({ sectionName, movies, limit}) => {
         <div className='contenedor-img'>
           <img src={Fuego} alt="Fuego" />
         </div>
-        <h2>{sectionName}</h2>
+        <h2><span>{sectionName}</span></h2>
       </div>
       
         <MoviesGrid movies={limitedMovies} />
