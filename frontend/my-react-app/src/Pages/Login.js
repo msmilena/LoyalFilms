@@ -40,7 +40,7 @@ const Login = ({ onClose, onRegisterClick }) => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem("token", data.token);
-
+        localStorage.setItem("username", email);
         // Redirige a otra página (puedes personalizarla según tus necesidades)
         navigate("/");
         onClose(); // Close the login popup
