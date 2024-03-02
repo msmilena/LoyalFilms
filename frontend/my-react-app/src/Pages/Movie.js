@@ -6,6 +6,7 @@ import '../Componentes/Homepage.css';
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const imageUrl = "https://image.tmdb.org/t/p/w342" + infoPelicula.poster_path;
   const location = useLocation();
 
     useEffect(() => {
@@ -26,6 +27,8 @@ function Movie() {
             .then(data => { setinfoPelicula(data); console.log(data) })
             .catch(error => console.error('Error fetching movies:', error));
     }
+    console.log(infoPelicula)
+    console.log(infoPelicula.credits)
 
     return (
         <div>
@@ -35,7 +38,16 @@ function Movie() {
             <main className="mainDiv">
                 <div className="mainMovie">
                     <div className="infoMovie1">
+                       <img src={imageUrl} alt="Poster" />
+                        <h1>{infoPelicula.title}</h1>
+                        <p>{infoPelicula.release_date}</p>
+                        <p>{infoPelicula.genre}</p>
+                        <div className="infoMovie2">
+                         <p>{infoPelicula.overview}</p> 
+                         
+                            {/* <p>{infoPelicula.credits.cast}</p>  */}
 
+                        </div>
                     </div>
                     <div className="infoMovie2">
 

@@ -76,10 +76,11 @@ def get_peliculas_genero():
 @main.route('/informacion', methods=['GET'])
 def informacion_pelicula():
     try:
-        id = request.args.get('id', '')
+        id_pelicula = request.args.get('id', '')
+        print(id_pelicula)
         if not id:
             return jsonify({'message': "No hay un id de película", 'success': False})
-        movies = PeliculasService.get_informacion(id)
+        movies = PeliculasService.get_informacion(id_pelicula)
         if movies != None:
             return jsonify(movies)
         else:
