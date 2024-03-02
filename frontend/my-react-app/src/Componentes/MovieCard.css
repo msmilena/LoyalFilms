@@ -4,6 +4,7 @@
     font-family: 'Inter', sans-serif;
     list-style: none;
     flex-direction: column;
+    text-decoration: none
 }
 
 .movieImage{
