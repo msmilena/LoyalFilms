@@ -8,6 +8,7 @@ import Registro from './Pages/Register.js';
 import Resultados from './Pages/Resultados.js';
 import InfoUsuario from './Pages/InfoUsuario.js';
 import Perfil from './Pages/Perfil.js';
+import ResultadosGenero from './Pages/ResultadosGenero.js';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -34,6 +35,12 @@ const router = createBrowserRouter([
     path: "resultados/:palabra",
     element: <Resultados/>,
    },
+   ,
+  {
+    path: "resultadosgenero/:genero",
+    element: <ResultadosGenero/>,
+   },
+
    {
         path: "informacionUsuario",
        element: <InfoUsuario/>,

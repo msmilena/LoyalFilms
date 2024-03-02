@@ -21,6 +21,7 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [genero, setGenero] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -28,6 +29,11 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
     // Redirigir a la página de resultados de búsqueda con la palabra clave ingresada
     navigate(`/resultados/${searchTerm}`);
   };
+
+  const handleGeneroSearch = (genero) => {
+    navigate(`/resultadosgenero/${genero}`);
+  };
+
   const [username, setUsername] = useState(""); // Variable de estado para almacenar el nombre del usuario
   useEffect(() => {
     setUsername(localStorage.getItem("username"));
@@ -89,11 +95,11 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
               />
             </div>
             <div className="dropdown-content">
-              <a href="#">Acción</a>
-              <a href="#">Aventura</a>
-              <a href="#">Comedia</a>
-              <a href="#">Drama</a>
-              <a href="#">Suspenso</a>
+              <a href="#" onClick={() => { handleGeneroSearch(28); }}>Acción</a>
+              <a href="#" onClick={() => { handleGeneroSearch(12); }}>Aventura</a>
+              <a href="#" onClick={() => { handleGeneroSearch(35); }}>Comedia</a>
+              <a href="#" onClick={() => { handleGeneroSearch(18); }}>Drama</a>
+              <a href="#" onClick={() => { handleGeneroSearch(10749); }}>Romance</a>
             </div>
           </div>
         </li>
@@ -153,5 +159,4 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
     </nav>
   );
 };
-
 export default Navbar;

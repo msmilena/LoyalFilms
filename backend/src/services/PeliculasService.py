@@ -120,7 +120,6 @@ class PeliculasService():
                 "language": "es",
                 "sort_by": "popularity.desc",
                 "with_genres": genero,
-                # "page": 1,
                 
                 "api_key": api_key  
             }
