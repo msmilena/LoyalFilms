@@ -97,9 +97,14 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
         )}
 
         {isLoggedIn && (
+          <>
+          <li>
+            <RouterLink to="/informacionUsuario">ANAISBT</RouterLink>
+          </li>
           <li>
             <RouterLink onClick={handleLogout}>Cerrar Sesión</RouterLink>
           </li>
+        </>
         )}
       </ul>
     </nav>

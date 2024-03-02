@@ -1,11 +1,11 @@
 .moviesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, 160px);
+    grid-template-columns: repeat(auto-fill, 230px);
     gap: 40px;
-    /*padding: 40px;*/
+    padding: 40px;
     justify-content: center;
-    justify-items: center;
-    margin-bottom: 10px;
+    /* justify-items: center;
+    margin-bottom: 10px; */
     list-style: none;
     
 }
