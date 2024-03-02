@@ -7,6 +7,7 @@ from .routes import AuthRoutes
 from .routes import PeliculasRoutes
 from .routes import ResenasRoutes
 from .routes import StaticRoutes
+from .routes import ListasRoutes
 
 from flask_cors import CORS, cross_origin
 
@@ -42,6 +43,7 @@ def init_app(config):
     app.register_blueprint(AuthRoutes.main, url_prefix='/auth')
     app.register_blueprint(PeliculasRoutes.main, url_prefix='/movies')
     app.register_blueprint(ResenasRoutes.main, url_prefix='/resenas')
+    app.register_blueprint(ListasRoutes.main, "/listas")
     app.register_blueprint(StaticRoutes.main, url_prefix='/')
 
     return app
