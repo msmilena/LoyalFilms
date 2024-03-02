@@ -8,6 +8,9 @@ import Registro from './Pages/Register.js';
 import Resultados from './Pages/Resultados.js';
 import InfoUsuario from './Pages/InfoUsuario.js';
 import Perfil from './Pages/Perfil.js';
+import Movie from './Pages/Movie.js';
+
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -41,6 +44,10 @@ const router = createBrowserRouter([
     {
         path: "perfil",
         element: <Perfil />,
+    },
+    {
+        path: "movie",
+        element: <Movie />,
     }
 ]);
 

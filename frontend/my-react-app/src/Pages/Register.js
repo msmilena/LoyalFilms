@@ -96,13 +96,16 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
       // Maneja la respuesta del servidor
       if (response.ok) {
         setstatusRegister(
-          <div>
+          <div className="warningLabel2"
+          >
             Registro exitoso!{" "}
             <span
               style={{
                 color: "blue",
                 textDecoration: "underline",
                 cursor: "pointer",
+                marginRight:2,
+                marginLeft:2,
               }}
               onClick={onLoginClick}
             >
@@ -149,7 +152,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
         Nombre de Usuario
       </div>
       <label className="errorLabel">{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}{usernameError}</label>
-      
+
       <div className={"inputContainer"}>
         <input
           value={username}
@@ -161,20 +164,20 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
         Email
       </div>
       <label className="errorLabel">{showWarning && emailError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}{emailError}</label>
-        
+
       <div className={"inputContainer"}>
         <input
           value={email}
           placeholder="Ingresa nombre de usuario"
           onChange={ev => setEmail(ev.target.value)}
           className={"inputBox"} />
-        
+
       </div>
       <div className="subtitulo">
         Contraseña
       </div>
       <label className="errorLabel">{showWarning && passwordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}{passwordError}</label>
-        
+
       <div className={"inputContainer"}>
         <input
           type="password"
@@ -189,7 +192,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
         Repetir Contraseña
       </div>
       <label className="errorLabel">{showWarning && confirmpasswordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}{confirmpasswordError}</label>
-        
+
       <div className={"inputContainer"}>
         <input
           type="password"
@@ -198,7 +201,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
           onChange={ev => setconfirmPassword(ev.target.value)}
           className={"inputBox"}
         />
-        
+
       </div>
 
       <div className="opciones">

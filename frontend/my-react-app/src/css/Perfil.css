@@ -6,85 +6,86 @@
     -webkit-transition: all 0.4s ease 0s;
     -o-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
-    font-size: clamp(1.5em,3.5vw,4em);
+    font-size: clamp(1.5em, 3.5vw, 4em);
     font-family: 'Inter', sans-serif;
     color: rgb(196, 14, 97);
     font-weight: 700;
 }
 
-.mainPerfilDatos{
-    margin-top:100px !important;
+.mainPerfilDatos {
+    margin-top: 100px !important;
 }
 
 .tabs {
     width: 100%;
     margin-top: 15px;
 }
-    .tabs .tab-header {
-        display: flex;
-        align-items: center;
-        padding: 0px 10px;
-        gap: 10px;
-        width: 100%;
-        height: 60px;
-        /*border-radius: 10px;*/
-        /*background: rgb(240, 31, 126);*/
-        border-bottom: 0.5px rgb(240, 31, 126) solid;
-        font-size: clamp(1em,2vw,6em);
-        color: #444444;
-        /* font-size: 16px; */
-        font-weight: 500;
-    }
 
-    .tabs .tab-header > div{
-        flex:1;
-        text-align:center;
-        height:45px;
-        line-height:45px;
-        cursor:pointer;
-    }
+.tabs .tab-header {
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    gap: 10px;
+    width: 100%;
+    height: 60px;
+    /*border-radius: 10px;*/
+    /*background: rgb(240, 31, 126);*/
+    border-bottom: 0.5px rgb(240, 31, 126) solid;
+    font-size: clamp(1em, 2vw, 6em);
+    color: #444444;
+    /* font-size: 16px; */
+    font-weight: 500;
+}
 
-        .tabs .tab-header > div.active {
-            background: #fff;
-            /*border-radius: 10px;*/
-            border-bottom: 3px rgb(240, 31, 126) solid;
-        }
+.tabs .tab-header>div {
+    flex: 1;
+    text-align: center;
+    height: 45px;
+    line-height: 45px;
+    cursor: pointer;
+}
 
-    .tabs .tab-content {
-        position: relative;
-        width: 100%;
-        height: auto;
-        min-height: 50px;
-        /*background: rgb(196, 14, 97,0.4);*/
-        margin-top: 10px;
-        border-radius: 10px;
-        /*border: 1px solid rgba(196, 14, 97,0.5);*/
-        overflow-y: auto;
-    }
+.tabs .tab-header>div.active {
+    background: #fff;
+    /*border-radius: 10px;*/
+    border-bottom: 3px rgb(240, 31, 126) solid;
+}
 
-    .tabs .tab-content  > div{
-        padding:10px 20px;
-        /*position:absolute;*/
-        opacity:0;
-        top:-100%;
-        transition:top 500ms ease-in-out 0ms,opacity 500ms ease-in-out 0ms;
-        display:none;
-    }
+.tabs .tab-content {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 50px;
+    /*background: rgb(196, 14, 97,0.4);*/
+    margin-top: 10px;
+    border-radius: 10px;
+    /*border: 1px solid rgba(196, 14, 97,0.5);*/
+    overflow-y: auto;
+}
 
-        .tabs .tab-content > div.active {
-           top:0px;
-           opacity:1;
-           display:block
-        }
+.tabs .tab-content>div {
+    padding: 10px 20px;
+    /*position:absolute;*/
+    opacity: 0;
+    top: -100%;
+    transition: top 500ms ease-in-out 0ms, opacity 500ms ease-in-out 0ms;
+    display: none;
+}
 
-        .tabs .tab-content > div h1 {
-            margin:10px 0px;
-        }
+.tabs .tab-content>div.active {
+    top: 0px;
+    opacity: 1;
+    display: block
+}
 
-        .tabs .tab-content > div p {
-            margin: 10px 0px;
-            color:#222;
-        }
+.tabs .tab-content>div h1 {
+    margin: 10px 0px;
+}
+
+.tabs .tab-content>div p {
+    margin: 10px 0px;
+    color: #222;
+}
 
 .divPerfilCambios footer {
     margin: 8vh 0 3vh 0;
@@ -99,12 +100,12 @@
 }
 
 
-.w50{
-    width:50%;
+.w50 {
+    width: 50%;
 }
 
-.dflex{
-    display:flex;
+.dflex {
+    display: flex;
 }
 
 textarea {
@@ -127,18 +128,18 @@ textarea {
     cursor: pointer;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
-    font-size: clamp(0.8em,2vw,1em);
+    font-size: clamp(0.8em, 2vw, 1em);
 }
 
-    .btnguardarCambios:hover {
-        background-color: rgb(168, 12, 82);
-    }
+.btnguardarCambios:hover {
+    background-color: rgb(168, 12, 82);
+}
 
-    .btnguardarCambios:active {
-        background-color: rgb(168, 12, 82);
-    }
+.btnguardarCambios:active {
+    background-color: rgb(168, 12, 82);
+}
 
-.btnguardarCambios_Contraseña {
+.btnguardarCambios_Contraseï¿½a {
     padding: 7px 15px;
     background-color: rgb(196, 14, 97);
     color: white;
@@ -147,16 +148,16 @@ textarea {
     cursor: pointer;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
-    font-size: clamp(0.8em,2vw,1em);
+    font-size: clamp(0.8em, 2vw, 1em);
 }
 
-    .btnguardarCambios_Contraseña:hover {
-        background-color: rgb(168, 12, 82);
-    }
+.btnguardarCambios_Contraseï¿½a:hover {
+    background-color: rgb(168, 12, 82);
+}
 
-    .btnguardarCambios_Contraseña:active {
-        background-color: rgb(168, 12, 82);
-    }
+.btnguardarCambios_Contraseï¿½a:active {
+    background-color: rgb(168, 12, 82);
+}
 
 .btnguardarCambios_Avatar {
     padding: 7px 15px;
@@ -167,20 +168,22 @@ textarea {
     cursor: pointer;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
-    font-size: clamp(0.8em,2vw,1em);
-    width:25%;
+    font-size: clamp(0.8em, 2vw, 1em);
+    width: 25%;
 }
-    .btnguardarCambios_Avatar:hover {
-        background-color: rgb(168, 12, 82);
-    }
 
-    .btnguardarCambios_Avatar:active {
-        background-color: rgb(168, 12, 82);
-    }
+.btnguardarCambios_Avatar:hover {
+    background-color: rgb(168, 12, 82);
+}
+
+.btnguardarCambios_Avatar:active {
+    background-color: rgb(168, 12, 82);
+}
 
 /* App.css */
 #file-upload {
-    display: none; /* Oculta el input de tipo archivo */
+    display: none;
+    /* Oculta el input de tipo archivo */
 }
 
 .custom-file-upload {
@@ -194,6 +197,6 @@ textarea {
     border-radius: 5px;
 }
 
-    .custom-file-upload:hover {
-        background-color: #f0f0f0;
-    }
+.custom-file-upload:hover {
+    background-color: #f0f0f0;
+}

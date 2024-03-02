@@ -1,6 +1,7 @@
 import "./MovieCard.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Link } from "react-router-dom";
 
 export function MovieCard(props) {
   const imageUrl = "https://image.tmdb.org/t/p/w342" + props.movie.poster_path;
@@ -8,6 +9,7 @@ export function MovieCard(props) {
   const puntaje = (props.movie.vote_average / 2).toFixed(1);
   const porcentaje = ((puntaje / 5) * 100).toFixed(1);
   return (
+    <Link to={`/movie?id=${props.movie.id}`} className="movieCard">
     <li className="movieCard">
       <img
         width={230}
@@ -48,5 +50,6 @@ export function MovieCard(props) {
         
       </div>
     </li>
+    </Link>
   );
 }
