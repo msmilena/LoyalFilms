@@ -72,3 +72,17 @@ def get_peliculas_genero():
             return jsonify({'message': "NOTFOUND", 'success': True})
     except CustomException:
         return jsonify({'message': "ERROR", 'success': False})
+    
+@main.route('/informacion', methods=['GET'])
+def informacion_pelicula():
+    try:
+        id = request.args.get('id', '')
+        if not id:
+            return jsonify({'message': "No hay un id de película", 'success': False})
+        movies = PeliculasService.get_informacion(id)
+        if movies != None:
+            return jsonify(movies)
+        else:
+            return jsonify({'message': "NOTFOUND", 'success': True})
+    except CustomException:
+        return jsonify({'message': "ERROR", 'success': False})
