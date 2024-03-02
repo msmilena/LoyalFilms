@@ -135,11 +135,11 @@ const handleGeneroSearch = (genero) => {
             <div className="loader-container">
               <span className="loader"></span>
             </div>
-            <h2>Búsqueda: "{nombreGenero}"</h2>
+            <h2>Búsqueda: {nombreGenero}</h2>
           </div>
         ) : (
           <div>
-            <h2>Resultados en "{nombreGenero}"</h2>
+            <h2>Resultados en {nombreGenero}</h2>
             <MoviesGrid movies={currentResults} />
             <Navegacion
               totalPages={Math.ceil(searchResults.length / resultsPerPage)}

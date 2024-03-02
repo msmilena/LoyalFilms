@@ -126,7 +126,14 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
             <User size={20} style={{ color: "#C40E61", marginRight: "5px" }} />
             <button
               className="abrirLogin"
-              onClick={() => setShowLoginPopup(true)}
+              onClick={() => {
+                if (window.innerWidth <= 600) {
+                  setShowLoginPopup(false);
+                  console.log("showLoginPopup:", showLoginPopup);
+                } else {
+                  setShowLoginPopup(true);
+                }
+              }}
               style={{ color: "#C40E61" }}
             >
               Iniciar Sesión

@@ -4,6 +4,7 @@ import "../Componentes/Login.css";
 import { IoIosCloseCircleOutline,IoIosWarning } from "react-icons/io";
 
 import logosimbolo from "../img/LogoSimbolo.png";
+import { useEffect } from "react";
 
 const Login = ({ onClose, onRegisterClick }) => {
   const [email, setEmail] = useState("");
@@ -56,6 +57,8 @@ const Login = ({ onClose, onRegisterClick }) => {
   };
 
   return (
+
+    
     <div className={"popUpContainer"}>
       <IoIosCloseCircleOutline
         className={"closeButton"}
