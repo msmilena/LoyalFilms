@@ -7,6 +7,7 @@ import json
 
 
 api_key = 'eec91e51c2cbe9fd8e941f3bbc0fd811'
+movie_attributes = []
 
 class PeliculasService():
 
@@ -168,7 +169,7 @@ class PeliculasService():
                 response = requests.get(url, params=params)
                 response.raise_for_status()  # Raise an exception for HTTP errors
                 data = response.json()
-
+               # print(data)
                 # Check if the response contains the expected information
                 if 'title' in data:
                     # Make a request to get the credits
@@ -176,13 +177,36 @@ class PeliculasService():
                         response_credits = requests.get(urlcredits, params=paramsCredits)
                         response_credits.raise_for_status()  # Raise an exception for HTTP errors
                         data_credits = response_credits.json()
-
+                        #print(data_credits)
                         # Check if the response contains the credits information
                         if 'credits' in data_credits:
                             # Append the credits to the original data
                             data['credits'] = data_credits['credits']
+                            director = next((person for person in data['credits']['crew'] if person['job'] == 'Director'), None)  
+                            # saca los tres primeros actores
+                            cast = data['credits']['cast'][:3]
+                            puntaje = data['vote_average']/2
+                            porcentaje = round(((puntaje / 5) * 100), 2)
+                            year_release = data['release_date'][:4]
+                            movie_attributes = {
+                                'title': data['title'],          
+                                'overview': data['overview'],
+                                'release_date': data['release_date'],
+                                'vote_average': data['vote_average'],
+                                'porcentaje' : porcentaje,
+                                'puntaje' : puntaje,
+                                'poster_path': data['poster_path'],
+                                'director': director['name'] if director else None,
+                                'cast': [actor['name'] for actor in cast],
+                                'actor1': cast[0]['name'],
+                                'actor2': cast[1]['name'],
+                                'actor3': cast[2]['name'],
+                                'year_release': year_release,
 
-                        return data
+                            }
+
+                            print(movie_attributes)
+                        return movie_attributes
                     except requests.exceptions.RequestException as e:
                         # Handle any request error, such as a failed connection
                         print(f"Error in the request for credits: {e}")
@@ -195,31 +219,5 @@ class PeliculasService():
                 print(f"Error in the request: {e}")
                 return None
 
-            print(url)
-            try:
-                response = requests.get(url, params=params)
-                response.raise_for_status()  # Raise an exception for HTTP errors
-                # Check if the response contains the expected information
-                if response.status_code == 200:
-                    try:
-                        # Intentar cargar la respuesta como JSON
-                        data = response.json()
-                        print(data)
-                        # Comprobar si la respuesta contiene la información esperada
-                        if 'title' in data:
-                            return data
-                        else:
-                            print("La respuesta no contiene la información esperada.")
-                            return None
-                    except json.JSONDecodeError as e:
-                        print("La respuesta no es un JSON válido")
-                        return None
-                else:
-                    print(f"Error en la solicitud: {response.status_code}")
-                    return None
-            except requests.exceptions.RequestException as e:
-                # Handle any request error, such as a failed connection
-                print(f"Error in the request: {e}")
-                return None
         except CustomException as ex:
             raise CustomException(ex)

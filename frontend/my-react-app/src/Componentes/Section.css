@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
-.section-header{
+.section-header {
     font-family: 'Inter', sans-serif;
     padding: 20px;
     text-align: center;
@@ -8,33 +8,22 @@
     font-weight: bold;
     display: flex;
 
-    
+
 }
 
-    /*.section-header h2::after {
-        content: '';
-        position: absolute;*/
-        /*width: 70%;*/
-        /*width:50%;
-        height: 0.8px;
-        margin-top: 20px;*/
-        /*margin-left: 180px;*/
-        /*margin-left: 30vw;
-        background-color: #504A7980;
-    }*/
 
-    .section-header h2::after {
-        content: "";
-        background-color: #504A7980;
-        display: block;
-        position: relative;
-        top: 23px;
-        width: 100%;
-        height: 0.8px;
-        z-index: -1;
-    }
+.section-header h2::after {
+    content: "";
+    background-color: #504A7980;
+    display: block;
+    position: relative;
+    top: 23px;
+    width: 100%;
+    height: 0.8px;
+    z-index: -1;
+}
 
-.contenedor-img{
+.contenedor-img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,6 +31,6 @@
     margin-right: 10px;
 }
 
-.contenedor-img img{
+.contenedor-img img {
     width: 100%;
 }
