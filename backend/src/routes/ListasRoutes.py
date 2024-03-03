@@ -7,7 +7,7 @@ from src.utils.Security import Security
 # Services
 from src.services.PeliculasService import PeliculasService
 
-main = Blueprint('movies_blueprint', __name__)
+main = Blueprint('listas_blueprint', __name__)
 
 
 @main.route('/obtenerListas', methods=['GET'])

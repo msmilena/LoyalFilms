@@ -24,11 +24,17 @@ function Movie() {
         })
 
             .then(response => response.json())
-            .then(data => { setinfoPelicula(data); console.log(data) })
+            .then(data => { setinfoPelicula(data)})
             .catch(error => console.error('Error fetching movies:', error));
     }
-    console.log(infoPelicula)
-    console.log(infoPelicula.credits)
+    const cast = infoPelicula?.credits?.cast;
+    let actores = [];
+    if(cast) {
+        actores = cast.slice(0,3);
+    }
+    console.log(actores)
+    // console.log("-----------------------------")
+    // console.log(infoPelicula.credits)
 
     return (
         <div>
