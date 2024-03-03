@@ -79,9 +79,12 @@ def informacion_pelicula():
         id_pelicula = request.args.get('id', '')
         print(id_pelicula)
         if not id:
+            print('No hay un id de película')
             return jsonify({'message': "No hay un id de película", 'success': False})
         movies = PeliculasService.get_informacion(id_pelicula)
+        print(movies)
         if movies != None:
+
             return jsonify(movies)
         else:
             return jsonify({'message': "NOTFOUND", 'success': True})

@@ -56,6 +56,7 @@ function HomePage() {
   return (
     <div className={`homePage ${showLoginPopup || showRegisterPopup ? 'popupActive' : ''}`}>
       
+
       {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} onRegisterClick={() => {setShowRegisterPopup(true); setShowLoginPopup(false); }} />} {/* Modifica el componente de Login para manejar el clic en el enlace de registro */}
       {showRegisterPopup && <Register onCloseRegister={() => setShowRegisterPopup(false)} onLoginClick={()=>{setShowLoginPopup(true); setShowRegisterPopup(false);}}/>} {/* Muestra el componente de registro si showRegisterPopup es true */}
       
