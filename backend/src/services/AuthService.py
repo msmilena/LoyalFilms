@@ -4,7 +4,7 @@ from src.database.db import get_connection
 from src.utils.errors.CustomException import CustomException
 # Models
 from .models.User import User
-from google.cloud.firestore_v1.base_query import FieldFilter, Or
+from google.cloud.firestore_v1.base_query import FieldFilter
 
 
 class AuthService():

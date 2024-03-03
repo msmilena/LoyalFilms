@@ -27,6 +27,7 @@ function Movie() {
             .then(data => { setinfoPelicula(data)})
             .catch(error => console.error('Error fetching movies:', error));
     }
+    console.log(infoPelicula)
     const cast = infoPelicula?.credits?.cast;
     let actores = [];
     if(cast) {
