@@ -18,7 +18,7 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True, methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type", "Authorization"])
 
 
-cred = credentials.Certificate(r"C:\Users\milena.mitac\Desktop\LoyalFilms\LoyalFilms\backend\src\token\loyalfilsm-firebase-adminsdk-c3vxb-294f23391f (1).json")
+cred = credentials.Certificate(r"/etc/secrets/loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
 firebase_admin.initialize_app(cred)
 
 # Definir la función handle_options

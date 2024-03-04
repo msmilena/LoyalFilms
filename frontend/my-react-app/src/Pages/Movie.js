@@ -69,7 +69,7 @@ function Movie() {
   function obtenerListas(idusuario) {
     
   
-    fetch(`http://127.0.0.1:5000/listas/obtenerListas?idusuario=${idusuario}`, {
+    fetch(url+`/listas/obtenerListas?idusuario=${idusuario}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function Movie() {
 
 
     function estado_botones(idusuario, idpelicula) {
-        fetch('http://127.0.0.1:5000/listas/verificarPeliculaEnListas', {
+        fetch(url+'/listas/verificarPeliculaEnListas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function Movie() {
     }
 
     function obtenerResena(id) {
-        fetch(`http://127.0.0.1:5000/resenas/${id}`, {
+        fetch(url+`/resenas/${id}`, {
             method: "GET",
         })
             .then((response) => response.json())
@@ -154,7 +154,7 @@ function Movie() {
         const id = new URLSearchParams(location.search).get("id");
         console.log(vista);
         console.log('desmarcar vista');
-        fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+        fetch(url +'/listas/eliminarPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ function Movie() {
         console.log(vista);
         console.log('marcar vista');
         const id = new URLSearchParams(location.search).get("id");
-        fetch('http://127.0.0.1:5000/listas/anadirPelicula', {
+        fetch(url+'/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ function Movie() {
     function desmarcarFavorita() {
         const id = new URLSearchParams(location.search).get("id");
 
-        fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+        fetch(url+'/listas/eliminarPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -254,7 +254,7 @@ function Movie() {
 
     function marcarFavorita() {
         const id = new URLSearchParams(location.search).get("id");
-        fetch('http://127.0.0.1:5000/listas/anadirPelicula', {
+        fetch(url+'/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -293,7 +293,7 @@ function Movie() {
     }
 
     function eliminarResena(idresena) {
-        fetch(`http://127.0.0.1:5000/resenas/${idresena}`, {
+        fetch(url+`/resenas/${idresena}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

@@ -33,7 +33,7 @@ function Perfil() {
         setPestanaActiva(pestana);
     };
 
-
+    const url = "https://loyalfilms.onrender.com"
 
     useEffect(() => {
         let tabs = document.querySelector(".tabs");
@@ -58,11 +58,11 @@ function Perfil() {
 
     function obtenerDatosUsuario() {
         try {
-            const url = `http://localhost:5000/user/info?idUser=${idUser}`;
+            //const url = `http://localhost:5000/user/info?idUser=${idUser}`;
             console.log(idUser);
             //url.searchParams.append("idUser", idUser);
 
-            fetch(url, {
+            fetch(url+`/user/info?idUser=${idUser}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -106,7 +106,7 @@ function Perfil() {
         console.log(idUser, username, name, lastname, email, biografia, changeUsername, changeEmail);
         if (pestanaActiva === 'part1') {
             try {
-                const response = await fetch("http://localhost:5000/user/guardarDatos", {
+                const response = await fetch(url+"/user/guardarDatos", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -159,7 +159,7 @@ function Perfil() {
                 setShowStatus2(true);
             } else{
                         try {
-                            const response = await fetch("http://localhost:5000/user/editarContrasena", {
+                            const response = await fetch(url+"/user/editarContrasena", {
                                 method: "POST",
                                 headers: {
                                     "Content-Type": "application/json",

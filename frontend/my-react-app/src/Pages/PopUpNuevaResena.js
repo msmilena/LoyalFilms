@@ -8,12 +8,12 @@ const PopUpNuevaResena = ({ onCloseResena, idpelicula }) => {
     const [rating, setRating] = useState(null);
     const [hover, setHover] = useState(null);
     const [description, setDescription] = useState("")
-
+    const url = "https://loyalfilms.onrender.com"
     const guardarResena = () =>{
       //const idpelicula =new URLSearchParams(location.search).get("id");
       const usuario = localStorage.getItem("usuario") || null;
       // Aquí puedes enviar la solicitud PUT al servidor con los datos actualizados
-      fetch(`http://127.0.0.1:5000/resenas`, {
+      fetch(url+`/resenas`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

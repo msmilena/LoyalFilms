@@ -7,10 +7,10 @@ const PopUpEditarResena = ({ onCloseEdit, idResena }) => {
     const [rating, setRating] = useState(null);
     const [description, setDescription] = useState("")
     const [hover, setHover] = useState(null);
-
+    const url = "https://loyalfilms.onrender.com"
     const handleSave = () =>{
         // Aquí puedes enviar la solicitud PUT al servidor con los datos actualizados
-        fetch(`http://127.0.0.1:5000/resenas/${idResena}`, {
+        fetch(url+`/resenas/${idResena}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
