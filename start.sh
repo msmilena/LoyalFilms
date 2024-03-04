@@ -1,2 +1,2 @@
 #!/bin/bash
-exec gunicorn -b 0.0.0.0:5000 index:app
+exec gunicorn -b 0.0.0.0:5000 backend.index:app
