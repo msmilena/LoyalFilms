@@ -113,7 +113,10 @@ const Login = ({ onClose, onRegisterClick }) => {
         
 
         <div className="opciones">
-        <div>
+              <div style={{
+                  display: 'flex',
+                  gap: '10px',
+              }}>
             <input
                 type="checkbox"
                 id="rememberMe"

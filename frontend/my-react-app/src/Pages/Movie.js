@@ -46,6 +46,9 @@ function Movie() {
     const [resenas, setResenas] = useState([]);
     const url = "https://loyalfilms.onrender.com"
     useEffect(() => {
+        console.log(vista);
+        console.log(favorita);
+
         const id = new URLSearchParams(location.search).get("id");
         setIdPelicula(id)
         if (id) {
@@ -123,7 +126,8 @@ function Movie() {
     }
     function desmarcarVista() {
         const id = new URLSearchParams(location.search).get("id");
-
+        console.log(vista);
+        console.log('desmarcar vista');
         fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
             method: 'POST',
             headers: {
@@ -155,8 +159,10 @@ function Movie() {
     }
 
     function marcarVista() {
+        console.log(vista);
+        console.log('marcar vista');
         const id = new URLSearchParams(location.search).get("id");
-        fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+        fetch('http://127.0.0.1:5000/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +228,7 @@ function Movie() {
 
     function marcarFavorita() {
         const id = new URLSearchParams(location.search).get("id");
-        fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+        fetch('http://127.0.0.1:5000/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
