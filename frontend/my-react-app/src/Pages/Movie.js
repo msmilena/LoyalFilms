@@ -35,6 +35,7 @@ function Movie() {
   const [showNuevaLista, setshowNuevaLista] = useState(false);
   const [showNuevaResena, setshowNuevaResena] = useState(false);
   const [showEditarResena, setshowEditarResena] = useState(false);
+  const url = "https://loyalfilms.onrender.com"
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("id");
     if (id) {
@@ -54,7 +55,7 @@ function Movie() {
 
 
   function estado_botones(idusuario, idpelicula) {
-    fetch('/listas/verificarPeliculaEnListas', {
+    fetch(url+'/listas/verificarPeliculaEnListas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +83,7 @@ function Movie() {
       });
   }
   function obtenerPelicula(id) {
-    fetch(`http://localhost:5000/movies/informacion?id=${id}`, {
+    fetch(url+`/movies/informacion?id=${id}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -95,7 +96,7 @@ function Movie() {
   function desmarcarVista() {
       const id = new URLSearchParams(location.search).get("id");
     
-      fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+      fetch(url+'/listas/eliminarPelicula', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -127,7 +128,7 @@ function Movie() {
 
   function marcarVista() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+    fetch(url +'/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -161,7 +162,7 @@ function Movie() {
   function desmarcarFavorita() {
     const id = new URLSearchParams(location.search).get("id");
     
-      fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+      fetch(url +'/listas/eliminarPelicula', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -193,7 +194,7 @@ function Movie() {
 
   function marcarFavorita() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+    fetch(url +'/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
