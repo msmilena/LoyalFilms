@@ -398,7 +398,7 @@ function Movie() {
             </div>
           </div>
           <div className="infoMovie2">
-            <h1 className="titulo_pelicula">{infoPelicula.title}</h1>
+                      <h1 className="titulo_pelicula">{infoPelicula.title}({infoPelicula.year_release})</h1>
             <p className="info_titulo">Calificación</p>
             <div className="contenedorRating">
               <CircularProgressbar
@@ -426,7 +426,7 @@ function Movie() {
                 }}
               />
             </div>
-            <p>{infoPelicula.year_release} </p>
+            {/*<p>{infoPelicula.year_release} </p>*/}
             <p className="info_titulo"> Dirigida por </p>
             <p> {infoPelicula.director}</p>
 

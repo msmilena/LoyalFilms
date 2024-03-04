@@ -78,6 +78,33 @@ function InfoUsuario() {
         navigate(`/perfil`);
     };
 
+    const eliminarPerfil = async () => {
+        try {
+            const response = await fetch("http://localhost:5000/user/eliminarPerfil", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    idUser: idUser
+                }),
+            });
+
+            // Maneja la respuesta del servidor
+            if (response.ok) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("username");
+                localStorage.removeItem("idusuario");
+                window.location.href = "/";
+            } else {
+                // Maneja errores de la solicitud al servidor
+                const errorData = await response.json();
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         //<div className={`homePage ${showLoginPopup ? 'popupActive' : ''}`}>
         //    {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} />}
@@ -89,7 +116,14 @@ function InfoUsuario() {
                 <div class="navPerfil">
                     <img src={imgPerfil} class="imgPerfil" alt="imgPerfil" />
                     <p class="nombrePerfil">{datosUsuario.username}</p>
-                    <button class="btnEditarPerfil" onClick={editarPerfil}>Editar Perfil</button>
+                    <div class="" style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '20px'
+                    }}>
+                        <button class="btnEditarPerfil" onClick={editarPerfil}>Editar Perfil</button>
+                        <button class="btnEliminarPerfil" onClick={eliminarPerfil}>Eliminar Perfil</button>
+                    </div>
                 </div>
                 <div style={{ marginBottom: '10px' }}>
                     <Section sectionName="Peliculas Favoritas" movies={peliculasFavoritas} limit={5} />

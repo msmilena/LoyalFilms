@@ -88,3 +88,17 @@ def post_editarContrasena():
        return jsonify({'success': True, 'message': 'Cambio de contrasena exitoso'})
     else:
        return jsonify({'success': False, 'message': save_result['message']}), 400
+
+@main.route('/eliminarPerfil', methods=['POST'])
+def post_eliminarPerfil():
+    data=request.json
+    print(data)
+    idUser=data.get("idUser")
+
+    save_result = UserService.eliminarPerfil(idUser)
+
+    if save_result['success']:
+       return jsonify({'success': True, 'message': 'Eliminado exitoso'})
+    else:
+       return jsonify({'success': False, 'message': save_result['message']}), 400
+

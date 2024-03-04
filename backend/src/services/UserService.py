@@ -79,3 +79,14 @@ class UserService():
         except Exception as ex:
             raise CustomException(ex)
           
+    @classmethod
+    def eliminarPerfil(cls, idUser):
+        try:
+            db = get_connection()
+            db.collection('usuario').document(idUser).delete()
+
+            return {'success': True, 'message': 'Eliminacion de perfil exitosa'}
+        except Exception as ex:
+            raise CustomException(ex)
+          
+ 
