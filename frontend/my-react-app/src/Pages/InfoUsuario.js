@@ -13,7 +13,7 @@ function InfoUsuario() {
 
     const [showLoginPopup, setShowLoginPopup] = useState(false);
     const [peliculasFavoritas, setpeliculasFavoritas] = useState([]);
-    const [idUser, setIdUsername] = useState(localStorage.getItem("idUser") || "");
+    const [idUser, setIdUsername] = useState(localStorage.getItem("idusuario") || "");
     const [datosUsuario, setDatosUsuario] = useState([]);
 
     useEffect(() => {

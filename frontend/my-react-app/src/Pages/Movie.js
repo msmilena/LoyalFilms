@@ -381,8 +381,8 @@ function Movie() {
                 </div>
                 Calificar
               </div>
-              <div className="fila" style={{ justifyContent: "center" }}>
-                <div className="boton">
+              <div className="fila" style={{ justifyContent: "center", borderBottom: '0px solid #00000047', paddingBottom: '0px' }}>
+              <div className="boton">
                   <div className="contenedorIcono">
                     <FaRegShareFromSquare
                       style={{

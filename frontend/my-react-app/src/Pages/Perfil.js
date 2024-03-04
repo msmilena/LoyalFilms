@@ -15,7 +15,7 @@ function Perfil() {
     const [name, setName] = useState("");
     const [biografia, setBiografia] = useState("");
     const [lastname, setLastname] = useState("");
-    const [idUser, setIdUsername] = useState(localStorage.getItem("idUser") || "");
+    const [idUser, setIdUsername] = useState(localStorage.getItem("idusuario") || "");
     const [datosUsuario, setDatosUsuario2] = useState([]);
     const [pestanaActiva, setPestanaActiva] = useState('part1');
     const [statusSave1, setstatusSave1] = useState("");

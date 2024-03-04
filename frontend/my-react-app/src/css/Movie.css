@@ -149,12 +149,13 @@ display: grid;
     width: 90%;
 }
 
-.filaRating{
-    display:grid;
+.filaRating {
+    display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     justify-items: center;
-    width: 100%;
+    width: 95%;
+    border-bottom: 2px solid #00000047;
 }
 
 input[type="radio"]{
