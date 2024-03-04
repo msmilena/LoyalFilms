@@ -9,7 +9,7 @@ export function MovieCard(props) {
   const puntaje = (props.movie.vote_average / 2).toFixed(1);
   const porcentaje = ((puntaje / 5) * 100).toFixed(1);
   return (
-    <Link to={`/movie?id=${props.movie.id}`} className="movieCard">
+    <Link to={`https://loyalfilms-clients.onrender.com/movie?id=${props.movie.id}`} className="movieCard">
     <li className="movieCard">
       <img
         width={230}
