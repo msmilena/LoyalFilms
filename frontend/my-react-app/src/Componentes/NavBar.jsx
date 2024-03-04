@@ -143,26 +143,29 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
           </li>
         )}
 
-        {isLoggedIn && (
-          <ul className="dropdown">
-            <li>
-              <User
-                size={20}
+              {isLoggedIn && (
+            <div className="dropdown">
+            <div className="contenedorbtn">
+                          <button className="dropPerfil"><User
+                size={25}
                 style={{ color: "#C40E61", marginRight: "5px" }}
               />
-              {username}
-            </li>
-
-            <li>
-              <RouterLink onClick={handleLogout}>Cerrar Sesión</RouterLink>
-            </li>
-
-            <li>
-              <RouterLink to="/perfil" onClick={closeMenu}>
-                Perfil
-              </RouterLink>
-            </li>
-          </ul>
+              {username}</button>
+              <IoIosArrowDown
+                className="arrow-icon"
+                              style={{ marginLeft: "10px", color: "#C40E61" }}
+              />
+            </div>
+                      <div className="dropdown-content perfildrop">
+                          <RouterLink to="/informacionUsuario" onClick={closeMenu}>
+                              Perfil
+                          </RouterLink>
+                          <RouterLink onClick={handleLogout} style={{
+                              borderTop: '2px solid #4444',
+                              textAlign: 'center'
+                          }}>Cerrar Sesión</RouterLink>
+            </div>
+          </div>
         )}
       </ul>
     </nav>

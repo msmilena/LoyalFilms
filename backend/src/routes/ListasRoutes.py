@@ -41,8 +41,8 @@ def crear_lista():
        return response, 401
     
 
-@main.route('/añadirPelicula', methods=['POST'])
-def añadir_pelicula():
+@main.route('/anadirPelicula', methods=['POST'])
+def anadir_Pelicula():
     has_access = Security.verify_token(request.headers)
     if has_access:
     # para crear una lista necesita idusuario, nombre lista, descripcion lista
@@ -63,7 +63,7 @@ def añadir_pelicula():
                 return jsonify({'message': "Falta el nombre de la película", 'success': False}), 400
             
             _peliculaLista = peliculaLista( id_usuario, nombre_lista, id_pelicula, nombre_pelicula)
-            pelicula_agregada=ListasService.añadir_pelicula(_peliculaLista)
+            pelicula_agregada=ListasService.anadir_pelicula(_peliculaLista)
             if pelicula_agregada['success']:
                 return jsonify({'success': True, 'message': pelicula_agregada['message']})
             else:
@@ -73,14 +73,22 @@ def añadir_pelicula():
     else:
        response = jsonify({'message': 'Unauthorized'})
        return response, 401
+    
 @main.route('/obtenerListas', methods=['GET'])
 def obtener_listas():
     has_access = Security.verify_token(request.headers)
+    print("inicia")
     if has_access:
-        data = request.json  # Accede a los datos JSON en lugar de los datos del formulario
-        id_usuario = data.get('idusuario')
+        print("en la ruta")
+        #data = request.json  # Accede a los datos JSON en lugar de los datos del formulario
+        
+        #id_usuario = data.get('idusuario')
+        id_usuario=request.args.get('idusuario')
+        print("en la ruta", id_usuario)
         if not id_usuario:
+                print("falta id")
                 return jsonify({'message': "Falta el ID del usuario", 'success': False}), 400
+                
         result = ListasService.obtener_listas(id_usuario)
         if result['success']:
             return jsonify(result), 200
@@ -95,6 +103,7 @@ def obtener_peliculas_lista():
     has_access = Security.verify_token(request.headers)
     if has_access:
         data = request.json
+        print(data)
         id_usuario = data.get('idusuario')
         nombre_lista = data.get('nombreLista')
 

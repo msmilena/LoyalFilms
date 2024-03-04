@@ -91,23 +91,66 @@ nav img{
   }
   
   /* Estilos para el botón del dropdown */
-  .dropbtn {
+.dropbtn {
     background-color: transparent;
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
-  
-  /* Estilos para el contenido del dropdown (inicialmente oculto) */
-  .dropdown-content {
+    text-decoration: none;
+    color: #444444;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+    font-family: 'Inter', sans-serif;
+}
+
+.dropPerfil {
+    background-color: transparent;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #444444;
+    font-weight: 500;
+    transition: 0.3s ease-in-out;
+    font-family: 'Inter', sans-serif;
+    color: rgb(196, 14, 97);
+    display: flex;
+    align-items: center;
+}
+
+.perfildrop {
     display: none;
     position: absolute;
     background-color: #F6F4FF;
-    min-width: 160px;
+    min-width: 140px !important;
     box-shadow: 0px 8px 16px 0px #444444;
     z-index: 1;
-  }
+    margin-top: 0px;
+    border: 1px solid #C40E61;
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+
+    .perfildrop a {
+        text-decoration: none;
+        color: #444444;
+        font-size: 16px;
+        /* font-weight: 500; */
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+    }
+
+    /* Estilos para el contenido del dropdown (inicialmente oculto) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #F6F4FF;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px #444444;
+        z-index: 1;
+    }
   
+
   /* Estilos para los enlaces dentro del dropdown */
   .dropdown-content a {
     color: #444444;
@@ -129,13 +172,14 @@ nav img{
     width: auto;
     display: flex;
   }
-  
-  input{
+
+input {
     border: none;
-    background:none ;
+    background: none;
     font-size: 15px;
     outline: none;
-  }
+    width: 100%;
+}
 
   .search-icon {
     position: absolute;

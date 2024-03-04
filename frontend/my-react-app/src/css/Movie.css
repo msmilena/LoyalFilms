@@ -63,13 +63,14 @@ display: grid;
 
 }
 
-.contenedorBotones{
-    display:grid;
+.contenedorBotones {
+    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 30% 30% 30%;
     gap: 20px;
     background-color: #F6F4FF;
     border-radius: 15px;
+    border: 2px solid #00000047;
     font-size: 0.90em;
     justify-items: center;
     padding: 20px 0 20px 0;
@@ -78,16 +79,40 @@ display: grid;
 .boton {
     display: flex;
     flex-direction: column;
-    align-items:center;
+    align-items: center;
     width: 33.33%;
     height: 100%;
-
+    text-align: center;
 }
 
-.fila{
+.botonRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.style-module_simpleStarRating__nWUxf {
+    margin-right: 0px;
+}
+
+.style-module_starRatingWrap__q-lJC {
+    margin-right: 0px;
+}
+
+.style-module_emptyIcons__Bg-FZ {
+    margin-right: 0px;
+}
+.fila {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
+    align-items: center;
+    border-bottom: 2px solid #00000047;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
     width: 95%;
 }
 
@@ -124,12 +149,13 @@ display: grid;
     width: 90%;
 }
 
-.filaRating{
-    display:grid;
+.filaRating {
+    display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
     justify-items: center;
-    width: 100%;
+    width: 95%;
+    border-bottom: 2px solid #00000047;
 }
 
 input[type="radio"]{

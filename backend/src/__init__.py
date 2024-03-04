@@ -8,6 +8,7 @@ from .routes import PeliculasRoutes
 from .routes import ResenasRoutes
 from .routes import StaticRoutes
 from .routes import ListasRoutes
+from .routes import UserRoutes
 
 from flask_cors import CORS, cross_origin
 
@@ -17,7 +18,7 @@ app = Flask(__name__)
 CORS(app, origins="*", supports_credentials=True, methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type", "Authorization"])
 
 
-cred = credentials.Certificate(r"src\token\loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
+cred = credentials.Certificate(r"/etc/secrets/loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
 firebase_admin.initialize_app(cred)
 
 # Definir la función handle_options
@@ -44,6 +45,7 @@ def init_app(config):
     app.register_blueprint(PeliculasRoutes.main, url_prefix='/movies')
     app.register_blueprint(ResenasRoutes.main, url_prefix='/resenas')
     app.register_blueprint(ListasRoutes.main, url_prefix="/listas")
+    app.register_blueprint(UserRoutes.main, url_prefix='/user')
     app.register_blueprint(StaticRoutes.main, url_prefix='/')
 
     return app
