@@ -44,7 +44,7 @@ function Movie() {
   const [idResenaSeleccionada, setIdResenaSeleccionar] = useState(null);
   const [idPelicula, setIdPelicula] = useState(null);
   const [resenas, setResenas] = useState([]);
-
+  const url = "https://loyalfilms.onrender.com"
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("id");
     setIdPelicula(id)
@@ -57,16 +57,42 @@ function Movie() {
 
     setIsLoggedIn(!!localStorage.getItem("token")); // Actualizar el estado de isLoggedIn al montar el componente
     if (isLoggedIn) {
-      // console.log(id)
+       console.log(localStorage.getItem("idusuario"))
       estado_botones(localStorage.getItem("idusuario"), id)
     }
 
   }, [location.search]);
 
+  function obtenerListas(idusuario) {
+    
+  
+    fetch(`http://127.0.0.1:5000/listas/obtenerListas?idusuario=${idusuario}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error al obtener las listas del usuario');
+        }
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Aquí maneja el error si ocurriera
+      });
+  }
+  
 
 
   function estado_botones(idusuario, idpelicula) {
-    fetch(url+'/listas/verificarPeliculaEnListas', {
+    fetch('http://127.0.0.1:5000/listas/verificarPeliculaEnListas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -156,7 +182,7 @@ function Movie() {
 
   function marcarVista() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch(url +'/listas/añadirPelicula', {
+    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -222,7 +248,7 @@ function Movie() {
 
   function marcarFavorita() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch(url +'/listas/añadirPelicula', {
+    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -410,6 +436,8 @@ function Movie() {
                         console.log("show:", showListPopUp);
                       } else {
                         setshowListPopUp(true);
+                        obtenerListas(localStorage.getItem("idusuario"));
+                        console.log("hola paso por listas")
                       }
                     }}>
                     <IoIosAddCircleOutline

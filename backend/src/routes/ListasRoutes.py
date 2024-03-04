@@ -73,14 +73,22 @@ def añadir_pelicula():
     else:
        response = jsonify({'message': 'Unauthorized'})
        return response, 401
+    
 @main.route('/obtenerListas', methods=['GET'])
 def obtener_listas():
     has_access = Security.verify_token(request.headers)
+    print("inicia")
     if has_access:
-        data = request.json  # Accede a los datos JSON en lugar de los datos del formulario
-        id_usuario = data.get('idusuario')
+        print("en la ruta")
+        #data = request.json  # Accede a los datos JSON en lugar de los datos del formulario
+        
+        #id_usuario = data.get('idusuario')
+        id_usuario=request.args.get('idusuario')
+        print("en la ruta", id_usuario)
         if not id_usuario:
+                print("falta id")
                 return jsonify({'message': "Falta el ID del usuario", 'success': False}), 400
+                
         result = ListasService.obtener_listas(id_usuario)
         if result['success']:
             return jsonify(result), 200
