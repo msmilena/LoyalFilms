@@ -26,7 +26,7 @@ class AuthService():
                 else:
                     is_admin_value = "False"
                 if doc_data and doc_data['password'] == user.password:
-                    return User( doc_data['username'], doc_data['password'], is_admin_value)
+                    return User( doc.id, doc_data['username'], doc_data['password'], is_admin_value)
                 return None
         except Exception as ex:
             raise CustomException(ex)

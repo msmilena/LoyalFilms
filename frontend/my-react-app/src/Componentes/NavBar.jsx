@@ -17,6 +17,7 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
+    localStorage.removeItem("idusuario");
     window.location.href = "/";
   };
 

@@ -9,7 +9,10 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegShareFromSquare } from "react-icons/fa6";
-import Fuego from "../img/Fuego.png";
+import Login from '../Pages/Login.js';
+import Register from './Register.js';
+import { RxEyeClosed } from "react-icons/rx";
+import { FaHeart } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { LuUser2 as User } from "react-icons/lu";
 import { FaRegEdit } from "react-icons/fa";
@@ -18,10 +21,14 @@ import PopUpLista from "./PopUpLista";
 import PopUpNuevaLista from "./PopUpNuevaLista";
 import PopUpNuevaResena from "./PopUpNuevaResena";
 import PopUpEditarResena from "./PopUpEditarResena.js";
+import Fuego from '../img/Fuego.png';
 
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
+  const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+  const [vista, setVista] = useState(false);
+  const [favorita, setFavorita] = useState(false);
   const imageUrl = "https://image.tmdb.org/t/p/w342" + infoPelicula.poster_path;
   const location = useLocation();
   const [showListPopUp, setshowListPopUp] = useState(false);
@@ -35,8 +42,45 @@ function Movie() {
     } else {
       alert("No se encontró el ID en la URL");
     }
+
+    const isLoggedIn = !!localStorage.getItem("token");
+    if (isLoggedIn) {
+      // console.log(id)
+      estado_botones(localStorage.getItem("idusuario"), id)
+    }
+
   }, [location.search]);
 
+
+
+  function estado_botones(idusuario, idpelicula) {
+    fetch('/listas/verificarPeliculaEnListas', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        idusuario: idusuario,
+        idpelicula: idpelicula
+      })
+    })
+      .then(response => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error al verificar la película en las listas del usuario');
+        }
+      })
+      .then(data => {
+        setVista(data.Vista);
+        setFavorita(data.Favorita);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Aquí maneja el error si ocurriera
+      });
+  }
   function obtenerPelicula(id) {
     fetch(`http://localhost:5000/movies/informacion?id=${id}`, {
       method: "GET",
@@ -47,6 +91,139 @@ function Movie() {
       })
       .catch((error) => console.error("Error fetching movies:", error));
   }
+
+  function desmarcarVista() {
+      const id = new URLSearchParams(location.search).get("id");
+    
+      fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          idusuario: localStorage.getItem('idusuario'), // Obtén el ID de usuario de localStorage
+          nombreLista: 'Peliculas Vistas', // Nombre de lista "Peliculas Vistas"
+          idPelicula: id // Utiliza el ID de la película de la URL
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Recarga la página si la solicitud fue exitosa
+          // window.location.reload();
+          setVista(false)
+        } else {
+          // Captura el mensaje de error
+          return response.json().then(data => {
+            throw new Error(data.message);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Aquí puedes manejar el error si ocurriera
+      });
+  }
+
+  function marcarVista() {
+    const id = new URLSearchParams(location.search).get("id");
+    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        nombreLista: 'Peliculas Vistas', // Reemplaza con el nombre de tu lista
+        idusuario: localStorage.getItem('idusuario'), // Obtén el ID de usuario de localStorage
+        idpelicula: id, // Suponiendo que infoPelicula contiene la información de la película actual
+        nombrePelicula: infoPelicula.title // Suponiendo que infoPelicula contiene la información de la película actual
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        // Recarga la página si la solicitud fue exitosa
+        //window.location.reload();
+        setVista(true)
+      } else {
+        // Captura el mensaje de error
+        return response.json().then(data => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Aquí puedes manejar el error si ocurriera
+    });
+  }
+
+  function desmarcarFavorita() {
+    const id = new URLSearchParams(location.search).get("id");
+    
+      fetch('http://127.0.0.1:5000/listas/eliminarPelicula', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        body: JSON.stringify({
+          idusuario: localStorage.getItem('idusuario'), // Obtén el ID de usuario de localStorage
+          nombreLista: 'Peliculas Favoritas', // Nombre de lista "Peliculas Vistas"
+          idPelicula: id // Utiliza el ID de la película de la URL
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Recarga la página si la solicitud fue exitosa
+          // window.location.reload();
+          setFavorita(false)
+        } else {
+          // Captura el mensaje de error
+          return response.json().then(data => {
+            throw new Error(data.message);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        // Aquí puedes manejar el error si ocurriera
+      });
+  }
+
+  function marcarFavorita() {
+    const id = new URLSearchParams(location.search).get("id");
+    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+        nombreLista: 'Peliculas Favoritas', // Reemplaza con el nombre de tu lista
+        idusuario: localStorage.getItem('idusuario'), // Obtén el ID de usuario de localStorage
+        idpelicula: id, // Suponiendo que infoPelicula contiene la información de la película actual
+        nombrePelicula: infoPelicula.title // Suponiendo que infoPelicula contiene la información de la película actual
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        // Recarga la página si la solicitud fue exitosa
+        setFavorita(true)
+        //window.location.reload();
+      } else {
+        // Captura el mensaje de error
+        return response.json().then(data => {
+          throw new Error(data.message);
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Aquí puedes manejar el error si ocurriera
+    });
+  }
+
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const numeroDeResenas = 2; // Puedes ajustar esto según el número deseado de repeticiones
@@ -116,14 +293,20 @@ function Movie() {
         </div>
       </div>
     </div>
-  ));
+      ));
+  // console.log(infoPelicula);
+
   return (
     <div className={`page ${showLoginPopup || showListPopUp || showNuevaLista || showNuevaResena || showEditarResena? 'popupActive' : ''}`}>
       {showListPopUp && <PopUpLista onCloseList={() => setshowListPopUp(false)} onNuevoClick={() => {setshowNuevaLista(true); setshowListPopUp(false); setShowLoginPopup(false)}}  />} 
       {showNuevaLista && <PopUpNuevaLista onCloseNueva={() => setshowNuevaLista(false)} />}
       {showNuevaResena && <PopUpNuevaResena onCloseResena={() => setshowNuevaResena(false)} />}
       {showEditarResena && <PopUpEditarResena onCloseEdit={() => setshowEditarResena(false)} />}
-      <header>
+      
+      {showLoginPopup && <Login onClose={() => setShowLoginPopup(false)} onRegisterClick={() => { setShowRegisterPopup(true); setShowLoginPopup(false); }} />} {/* Modifica el componente de Login para manejar el clic en el enlace de registro */}
+      {showRegisterPopup && <Register onCloseRegister={() => setShowRegisterPopup(false)} onLoginClick={() => { setShowLoginPopup(true); setShowRegisterPopup(false); }} />} {/* Muestra el componente de registro si showRegisterPopup es true */}
+
+    <header>
         <Navbar
           showLoginPopup={showLoginPopup}
           setShowLoginPopup={setShowLoginPopup}
@@ -138,48 +321,31 @@ function Movie() {
             <div className="contenedorBotones">
               <div className="fila">
                 <div className="boton">
-                  <div className="contenedorIcono">
-                    <MdOutlineRemoveRedEye
-                      style={{
-                        color: "#C40E61",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  </div>
-                  Ver
+                  <button id="botonMarcado" className="boton" onClick={vista ? desmarcarVista : marcarVista}>
+                    {vista ? (
+                      <MdOutlineRemoveRedEye size={50} style={{ color: "#C40E61" }} />
+                    ) : (
+                      <RxEyeClosed size={50} style={{ color: "#C40E61" }} />
+                    )}
+                    Ver
+                  </button>
                 </div>
                 <div className="boton">
-                  <div className="contenedorIcono">
-                    <FaRegHeart
-                      style={{
-                        color: "#C40E61",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                  </div>
-                  Me gusta
+                  <button id="botonMarcado" className="boton" onClick={favorita ? desmarcarFavorita : marcarFavorita}>
+                    {favorita ? (
+                      <FaHeart size={50} style={{ color: "#C40E61" }} />
+                    ) : (
+                      <FaRegHeart size={50} style={{ color: "#C40E61" }} />
+                    )}
+                    Me gusta
+                  </button>
                 </div>
                 <div className="boton">
-                  <div className="contenedorIcono abrirLogin"
-                  onClick= {() => {
-                    if (window.innerWidth <= 600) {
-                      setshowListPopUp(false);
-                      console.log("show:", showListPopUp);
-                    } else {
-                      setshowListPopUp(true);
-                    }
-                  }}>
-                    <IoIosAddCircleOutline
-                      style={{
-                        color: "#C40E61",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-                    
-                  </div>
+                
+                  <IoIosAddCircleOutline
+                    size={50}
+                    style={{ color: "#C40E61" }}
+                  />
                   Añadir a lista
                 </div>
               </div>
@@ -240,9 +406,8 @@ function Movie() {
                 strokeWidth={15}
                 styles={{
                   path: {
-                    stroke: `rgba(34, 3, 255, ${
-                      infoPelicula.porcentaje / 100
-                    })`,
+                    stroke: `rgba(34, 3, 255, ${infoPelicula.porcentaje / 100
+                      })`,
                     transition: "stroke-dashoffset 0.5s ease 0s",
                   },
                   trail: {
@@ -302,6 +467,7 @@ function Movie() {
           </div>
         </div>
 
+        
         <Footer
           showLoginPopup={showLoginPopup}
           setShowLoginPopup={setShowLoginPopup}

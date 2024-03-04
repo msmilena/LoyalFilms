@@ -14,6 +14,7 @@ class Security():
         payload = {
             'iat': datetime.datetime.now(tz=cls.tz),
             'exp': datetime.datetime.now(tz=cls.tz) + datetime.timedelta(minutes=180),
+            'idusuario':authenticated_user.idusuario,
             'username': authenticated_user.username,
             'password': authenticated_user.password,
             'admin': authenticated_user.isadmin
