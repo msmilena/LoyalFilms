@@ -43,6 +43,7 @@ const Login = ({ onClose, onRegisterClick }) => {
         //console.log(data)
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", email);
+        localStorage.setItem("usuario", data.username)
         localStorage.setItem("idusuario", data.idusuario )
         onClose(); // Close the login popup
         window.location.reload(); 

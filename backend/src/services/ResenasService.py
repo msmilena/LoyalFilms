@@ -46,7 +46,8 @@ class ResenasService():
             if resena.exists:
                 resena_ref.update({
                 'contenido':resena_actualizada.contenido,
-                'fecha':resena_actualizada.fecha
+                'fecha':resena_actualizada.fecha,
+                'calificacion':resena_actualizada.calificacion
             })
                 resena_actualizada = resena_ref.get().to_dict()
                 response_data={"codigo": 200, "estado": "Éxito", "mensaje": "Reseña actualizada correctamente", "resena": resena_actualizada}

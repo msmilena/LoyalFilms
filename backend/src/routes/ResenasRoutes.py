@@ -20,43 +20,31 @@ main = Blueprint('resenas_blueprint', __name__)
 
 @main.route('/<idpelicula>' , methods=['GET'])
 def get_resenas(idpelicula):
-    
-    has_access = Security.verify_token(request.headers)
-    #print(has_access)
-    if has_access:
         try:
             resenas = ResenasService.get_resenas(idpelicula)
             if (len(resenas) > 0):
                 return jsonify(resenas)
             else:
-                return jsonify({'message': "NOTFOUND", 'success': True})
+                return jsonify({'message': "NOTFOUND", 'success': False})
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
-    else:
-        response = jsonify({'message': 'Unauthorized'})
-        return response, 401
     
 @main.route('/' , methods=['POST'])
 def crear_resenas():
     tz = pytz.timezone("America/Lima")
-    has_access = Security.verify_token(request.headers)
-    #print(has_access)
-    if has_access:
-        try:
+    try:
             #print(request.form)
-            contenido=request.form['contenido']
+            calificacion =request.json.get("calificacion")
+            contenido = request.json.get('contenido')
             fecha=datetime.datetime.now(tz=tz)
-            idpelicula=request.form['idpelicula']
-            idusuario=request.form["idusuario"]
+            idpelicula=request.json.get('idpelicula')
+            idusuario=request.json.get('idusuario')
             #print(contenido)
-            _resena=Resenas(contenido, fecha, idpelicula, idusuario)
+            _resena=Resenas(contenido, fecha, idpelicula, idusuario, calificacion)
             response=ResenasService.crear_resena(_resena)
             return jsonify(response)
-        except CustomException:
+    except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
-    else:
-        response = jsonify({'message': 'Unauthorized'})
-        return response, 401
     
 @main.route('/<idresena>' , methods=['PUT'])
 def editar_resenas(idresena):
@@ -65,10 +53,11 @@ def editar_resenas(idresena):
     #print(has_access)
     if has_access:
         try:
-            contenido=request.form['contenido']
-            fecha=datetime.datetime.now(tz=tz)
-            _resena_nueva=Resenas_nueva(contenido, fecha)
-            response=ResenasService.editar_resena(idresena, _resena_nueva)
+            contenido = request.json.get('contenido')
+            calificacion = request.json.get('calificacion')
+            fecha = datetime.datetime.now(tz=tz)
+            _resena_nueva = Resenas_nueva(contenido, fecha, calificacion)
+            response = ResenasService.editar_resena(idresena, _resena_nueva)
             return jsonify(response)
         except CustomException:
             return jsonify({'message': "ERROR", 'success': False})
@@ -77,7 +66,6 @@ def editar_resenas(idresena):
         return response, 401
 @main.route('/<idresena>' , methods=['DELETE'])
 def eliminar_resenas(idresena):
-    tz = pytz.timezone("America/Lima")
     has_access = Security.verify_token(request.headers)
     #print(has_access)
     if has_access:

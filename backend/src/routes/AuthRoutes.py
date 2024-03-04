@@ -28,7 +28,7 @@ def login():
 
     if (authenticated_user != None):
         encoded_token = Security.generate_token(authenticated_user)
-        return jsonify({'success': True, 'token': encoded_token, 'idusuario': authenticated_user.idusuario})                                                                                                                                                                                                                    
+        return jsonify({'success': True, 'token': encoded_token, 'idusuario': authenticated_user.idusuario, "username":authenticated_user.username})                                                                                                                                                                                                                    
     else:
         response = jsonify({'message': 'Unauthorized'})
         return response, 401
