@@ -205,7 +205,7 @@ class PeliculasService():
 
                             }
 
-                            print(movie_attributes)
+                            #print(movie_attributes)
                         return movie_attributes
                     except requests.exceptions.RequestException as e:
                         # Handle any request error, such as a failed connection

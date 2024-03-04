@@ -44,14 +44,14 @@ const handleGeneroSearch = (genero) => {
   const [resultsPerPage, setResultsPerPage] = useState(12); // Resultados por página
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-
+  const url = "https://loyalfilms.onrender.com"
   // Función para buscar películas por la palabra clave y página
   const buscarPeliculas = async () => {
     try {
       setIsLoading(true); // Mostrar el loader
 
       const response = await fetch(
-        `http://localhost:5000/movies/genero?genero=${genero}`,
+        url+`/movies/genero?genero=${genero}`,
         {
           method: "GET",
           headers: {

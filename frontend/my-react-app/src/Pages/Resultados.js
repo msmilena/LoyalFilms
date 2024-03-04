@@ -18,14 +18,14 @@ export function Resultados() {
 
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-
+  const url = "https://loyalfilms.onrender.com"
   // Función para buscar películas por la palabra clave y página
   const buscarPeliculas = async () => {
     try {
       setIsLoading(true); // Mostrar el loader
 
       const response = await fetch(
-        `http://localhost:5000/movies/buscar?palabra=${palabra}`,
+        url+`/movies/buscar?palabra=${palabra}`,
         {
           method: "GET",
           headers: {

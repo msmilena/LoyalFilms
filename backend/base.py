@@ -15,7 +15,7 @@ from firebase_admin import firestore
 from google.cloud.firestore_v1 import SERVER_TIMESTAMP
 from google.cloud.firestore_v1.base_query import FieldFilter, Or
 
-cred = credentials.Certificate(r"src\token\loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
+cred = credentials.Certificate(r"\etc\secrets\loyalfilsm-firebase-adminsdk-c3vxb-294f23391f.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 class ResenaForm(FlaskForm):

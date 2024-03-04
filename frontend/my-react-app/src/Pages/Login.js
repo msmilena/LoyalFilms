@@ -14,6 +14,7 @@ const Login = ({ onClose, onRegisterClick }) => {
   const [showWarning, setShowWarning] = useState(false); // New state variable for showing warning
 
   const navigate = useNavigate();
+  const url = "https://loyalfilms.onrender.com"
 
   const onButtonClick = async () => {
     // Validación básica (puedes personalizarla según tus necesidades)
@@ -26,26 +27,26 @@ const Login = ({ onClose, onRegisterClick }) => {
 
     // Realiza la solicitud POST al servidor usando fetch
     try {
-      const response = await fetch("http://localhost:5000/auth", {
+      const response = await fetch( url +"/auth", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: email,
-          password: password,
+          password: password
         }),
       });
 
       // Maneja la respuesta del servidor
       if (response.ok) {
         const data = await response.json();
+        //console.log(data)
         localStorage.setItem("token", data.token);
-          localStorage.setItem("username", email);
-          localStorage.setItem("idUser", data.idUser);
-        // Redirige a otra página (puedes personalizarla según tus necesidades)
-        navigate("/");
+        localStorage.setItem("username", email);
+        localStorage.setItem("idusuario", data.idusuario )
         onClose(); // Close the login popup
+        window.location.reload(); 
       } else {
         // Maneja errores de la solicitud al servidor
         const errorData = await response.json();

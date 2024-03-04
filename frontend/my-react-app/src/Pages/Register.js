@@ -17,7 +17,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
   const [statusRegister, setstatusRegister] = useState("");
   const [showStatus, setShowStatus] = useState(false);
   const [showWarning, setShowWarning] = useState(false); // New state variable for showing warning
-
+  const url = "https://loyalfilms.onrender.com"
   // const navigate = useNavigate();
 
   const onButtonClick = async () => {
@@ -81,7 +81,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
 
     // Realiza la solicitud POST al servidor usando fetch
     try {
-      const response = await fetch("http://localhost:5000/auth/register", {
+      const response = await fetch(url +"/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -128,7 +128,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
   };
 
   return (
-    <div className={"popUpContainer"}>
+    <div className={"popUpContainer"} style={{paddingTop: "50vh"}}>
       <IoIosCloseCircleOutline
         className={"closeButton"}
         onClick={onCloseRegister}

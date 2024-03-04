@@ -49,8 +49,15 @@ class ListasService():
             existing_list = existing_list_ref.get()
 
             if not existing_list:
-                # Devolver un mensaje indicando que la lista no existe
-                return {'success': False, 'message': f'El usuario no tiene una lista con el nombre {nombre_lista}'}
+                # Si la lista no existe, créala
+                descripcion = ''
+                if nombre_lista == 'Peliculas Favoritas':
+                    descripcion = 'Aquí están las películas que has marcado como tus favoritas'
+                elif nombre_lista == 'Peliculas Vistas':
+                    descripcion = 'Aquí están las películas que has marcado como vistas'
+                nueva_lista = Lista(id_usuario, nombre_lista, descripcion)  
+                cls.crear_lista(nueva_lista)
+
 
             # Obtener el ID del documento de la lista
             lista_id = existing_list[0].id
@@ -95,21 +102,7 @@ class ListasService():
             listas_usuario = []
             for lista in listas:
                 lista_data = lista.to_dict()
-                lista_data['id'] = lista.id
-
-                # Obtener la información de la colección asociada a la lista
-                peliculas_ref = lista.reference.collection('peliculas')
-                peliculas = peliculas_ref.get()
-
-                # Recopilar los datos de las películas de la colección asociada
-                peliculas_lista = []
-                for pelicula in peliculas:
-                    pelicula_data = pelicula.to_dict()
-                    pelicula_data['id'] = pelicula.id
-                    peliculas_lista.append(pelicula_data)
-
-                lista_data['peliculas'] = peliculas_lista
-
+                lista_data['id_lista'] = lista.id
                 listas_usuario.append(lista_data)
 
             return {'success': True, 'listas': listas_usuario}
@@ -176,27 +169,29 @@ class ListasService():
     def eliminar_pelicula(cls, idusuario, nombre_lista, id_pelicula):
         try:
             db = get_connection()
-
             # Verificar si la lista existe
-            lista_ref = db.collection('listas').where('idusuario', '==', idusuario).where('nombre', '==', nombre_lista)
+            lista_ref = db.collection('listas').where(filter=FieldFilter('idusuario', '==', idusuario)).where(filter=FieldFilter('nombre', '==', nombre_lista))
             lista_docs = lista_ref.get()
             if not lista_docs:
                 return {'success': False, 'message': f'No se encontró la lista "{nombre_lista}" para el usuario con ID {idusuario}'}
 
-            # Obtener la referencia de la película en la lista y eliminarla
-            lista_doc = lista_docs[0].reference
-            lista_data = lista_doc.get().to_dict()
-            peliculas = lista_data.get('peliculas', [])
-            for pelicula in peliculas:
-                if pelicula.get('id') == id_pelicula:
-                    peliculas.remove(pelicula)
-                    lista_doc.update({'peliculas': peliculas})
-                    return {'success': True, 'message': 'Película eliminada de la lista correctamente'}
+            # Iterar sobre los documentos de lista encontrados (puede haber múltiples con el mismo nombre para diferentes usuarios)
+            for lista_doc in lista_docs:
+                # Obtener el ID del documento de lista
+                lista_id = lista_doc.id
+                # Obtener la referencia de la película en la lista y eliminarla
+                pelicula_ref = db.collection('listas').document(lista_id).collection('peliculas').where('idpelicula', '==', id_pelicula)
+                pelicula_docs = pelicula_ref.get()
+                for pelicula_doc in pelicula_docs:
+                    # Eliminar el documento de película
+                    db.collection('listas').document(lista_id).collection('peliculas').document(pelicula_doc.id).delete()
+                return {'success': True, 'message': 'Película eliminada de la lista correctamente'}
 
             return {'success': False, 'message': f'No se encontró la película con ID {id_pelicula} en la lista'}
 
         except Exception as ex:
-            raise CustomException(ex)
+            raise CustomException(ex) 
+    
     @classmethod
     def eliminar_lista_por_nombre(cls, id_usuario, nombre_lista):
         try:
@@ -214,6 +209,47 @@ class ListasService():
                 lista_doc.reference.delete()
 
             return {'success': True, 'message': f'Lista "{nombre_lista}" eliminada correctamente'}
+
+        except Exception as ex:
+            raise CustomException(ex)
+    @classmethod
+    def verificar_pelicula_en_listas(cls, id_usuario, id_pelicula):
+        try:
+            db = get_connection()
+
+            # Verificar si existe la lista "Peliculas Vistas" para el usuario dado
+            peliculas_vistas_ref = db.collection('listas').where(filter=FieldFilter('idusuario', '==', id_usuario)).where(filter=FieldFilter('nombre', '==', 'Peliculas Vistas'))
+            peliculas_vistas_docs = peliculas_vistas_ref.get()
+            vista = False
+            if peliculas_vistas_docs:
+                #print("Vistas")
+                # Si la lista existe, ver si la película está presente en ella
+                for doc in peliculas_vistas_docs:
+                    #print(doc.to_dict()['nombre'])
+                    peliculas_ref = db.collection('listas').document(doc.id).collection('peliculas').where(filter=FieldFilter('idpelicula', '==', id_pelicula))
+                    peliculas_docs = peliculas_ref.get()
+                    #print(peliculas_docs)
+                    if peliculas_docs:
+                        vista = True
+                        break
+
+            # Verificar si existe la lista "Peliculas Favoritas" para el usuario dado
+            peliculas_favoritas_ref = db.collection('listas').where(filter=FieldFilter('idusuario', '==', id_usuario)).where(filter=FieldFilter('nombre', '==', 'Peliculas Favoritas'))
+            peliculas_favoritas_docs = peliculas_favoritas_ref.get()
+            #print(peliculas_favoritas_docs)
+            favorita = False
+            if peliculas_favoritas_docs:
+                #print("Favoritas")
+                # Si la lista existe, ver si la película está presente en ella
+                for doc in peliculas_favoritas_docs:
+                    #print(doc)
+                    peliculas_ref = db.collection('listas').document(doc.id).collection('peliculas').where(filter=FieldFilter('idpelicula', '==', id_pelicula))
+                    peliculas_docs = peliculas_ref.get()
+                    if peliculas_docs:
+                        favorita = True
+                        break
+
+            return {'Vista': vista, 'Favorita': favorita}
 
         except Exception as ex:
             raise CustomException(ex)
