@@ -15,6 +15,7 @@ import { LuUser2 as User } from "react-icons/lu";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpLista from "./PopUpLista";
+import PopUpNuevaLista from "./PopUpNuevaLista";
 
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
@@ -22,7 +23,7 @@ function Movie() {
   const imageUrl = "https://image.tmdb.org/t/p/w342" + infoPelicula.poster_path;
   const location = useLocation();
   const [showListPopUp, setshowListPopUp] = useState(false);
-
+  const [showNuevaLista, setshowNuevaLista] = useState(false);
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("id");
     if (id) {
@@ -113,8 +114,9 @@ function Movie() {
     </div>
   ));
   return (
-    <div className={`page ${showLoginPopup || showListPopUp ? 'popupActive' : ''}`}>
-      {showListPopUp && <PopUpLista onCloseList={() => setshowListPopUp(false)} />} 
+    <div className={`page ${showLoginPopup || showListPopUp || showNuevaLista? 'popupActive' : ''}`}>
+      {showListPopUp && <PopUpLista onCloseList={() => setshowListPopUp(false)} onNuevoClick={() => {setshowNuevaLista(true); setshowListPopUp(false); setShowLoginPopup(false)}}  />} 
+      {showNuevaLista && <PopUpNuevaLista onCloseNueva={() => setshowNuevaLista(false)} />}
       <header>
         <Navbar
           showLoginPopup={showLoginPopup}

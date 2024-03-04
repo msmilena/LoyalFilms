@@ -3,7 +3,7 @@ import "../Componentes/Login.css";
 import { IoIosCloseCircleOutline, IoIosWarning } from "react-icons/io";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import logosimbolo from "../img/LogoSimbolo.png";
-const PopUpLista = ({ onCloseList }) => {
+const PopUpLista = ({ onCloseList, onNuevoClick }) => {
     const numeroDeListas = 3; // Puedes ajustar esto según el número deseado de listas
 
 const listas = Array.from({ length: numeroDeListas }, (_, index) => (
@@ -27,7 +27,7 @@ const listas = Array.from({ length: numeroDeListas }, (_, index) => (
         </div>
         <div className="fila">
         <div className="btnNueva">
-              <button>
+              <button onClick={onNuevoClick}>
                 <IoIosAddCircleOutline size={30} style={{ color: "#C40E61" }} />
                 Nueva Lista
               </button>
