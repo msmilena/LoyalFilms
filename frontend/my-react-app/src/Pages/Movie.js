@@ -16,6 +16,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import PopUpLista from "./PopUpLista";
 import PopUpNuevaLista from "./PopUpNuevaLista";
+import PopUpNuevaResena from "./PopUpNuevaResena";
+import PopUpEditarResena from "./PopUpEditarResena.js";
 
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
@@ -24,6 +26,8 @@ function Movie() {
   const location = useLocation();
   const [showListPopUp, setshowListPopUp] = useState(false);
   const [showNuevaLista, setshowNuevaLista] = useState(false);
+  const [showNuevaResena, setshowNuevaResena] = useState(false);
+  const [showEditarResena, setshowEditarResena] = useState(false);
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("id");
     if (id) {
@@ -98,8 +102,8 @@ function Movie() {
             Compartir
           </button>
         </div>
-        <div className="botonResena">
-          <button>
+        <div className="botonResena" >
+          <button onClick={() => setshowEditarResena(true)}>
             <FaRegEdit style={{ color: "#E8E8E8", size: "30px" }} />
             Editar Reseña
           </button>
@@ -114,9 +118,11 @@ function Movie() {
     </div>
   ));
   return (
-    <div className={`page ${showLoginPopup || showListPopUp || showNuevaLista? 'popupActive' : ''}`}>
+    <div className={`page ${showLoginPopup || showListPopUp || showNuevaLista || showNuevaResena || showEditarResena? 'popupActive' : ''}`}>
       {showListPopUp && <PopUpLista onCloseList={() => setshowListPopUp(false)} onNuevoClick={() => {setshowNuevaLista(true); setshowListPopUp(false); setShowLoginPopup(false)}}  />} 
       {showNuevaLista && <PopUpNuevaLista onCloseNueva={() => setshowNuevaLista(false)} />}
+      {showNuevaResena && <PopUpNuevaResena onCloseResena={() => setshowNuevaResena(false)} />}
+      {showEditarResena && <PopUpEditarResena onCloseEdit={() => setshowEditarResena(false)} />}
       <header>
         <Navbar
           showLoginPopup={showLoginPopup}
@@ -278,7 +284,16 @@ function Movie() {
 
           <div className="resenaSection">
             <div className="botonResena">
-              <button>
+              <button
+              onClick= {() => {
+                if (window.innerWidth <= 600) {
+                  setshowNuevaResena(false);
+                  console.log("show:", showNuevaResena);
+                } else {
+                  setshowNuevaResena(true);
+                }
+              }}
+              >
                 <IoIosAddCircleOutline size={30} style={{ color: "#E8E8E8" }} />
                 Añadir Reseña
               </button>
