@@ -89,3 +89,8 @@ display: grid;
     vertical-align: middle; /* Alinea verticalmente el icono con el texto */
     margin-right: 5px; /* Añade espacio entre el icono y el texto (ajusta según sea necesario) */
 }
+#botonMarcado{
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+}

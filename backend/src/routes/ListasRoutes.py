@@ -164,3 +164,22 @@ def eliminar_lista():
     else:
         response = jsonify({'message': 'Unauthorized'})
         return response, 401
+    
+@main.route('/verificarPeliculaEnListas', methods=['POST'])
+def verificar_pelicula_en_listas():
+    has_access = Security.verify_token(request.headers)
+    if has_access:
+        data = request.json
+        id_usuario = data.get('idusuario')
+        id_pelicula = data.get('idpelicula')
+        
+        if not id_usuario or not id_pelicula:
+            return jsonify({'message': "Falta el ID del usuario o el ID de la película", 'success': False}), 400
+        
+        resultado = ListasService.verificar_pelicula_en_listas(id_usuario, id_pelicula)
+        
+        return jsonify(resultado), 200
+        
+    else:
+       response = jsonify({'message': 'Unauthorized'})
+       return response, 401

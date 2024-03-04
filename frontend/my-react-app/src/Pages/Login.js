@@ -33,18 +33,19 @@ const Login = ({ onClose, onRegisterClick }) => {
         },
         body: JSON.stringify({
           username: email,
-          password: password,
+          password: password
         }),
       });
 
       // Maneja la respuesta del servidor
       if (response.ok) {
         const data = await response.json();
+        //console.log(data)
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", email);
-        // Redirige a otra página (puedes personalizarla según tus necesidades)
-        navigate("/");
+        localStorage.setItem("idusuario", data.idusuario )
         onClose(); // Close the login popup
+        window.location.reload(); 
       } else {
         // Maneja errores de la solicitud al servidor
         const errorData = await response.json();
