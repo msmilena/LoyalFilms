@@ -98,7 +98,7 @@ def obtener_listas():
        response = jsonify({'message': 'Unauthorized'})
        return response, 401
 
-@main.route('/obtenerPeliculasLista', methods=['GET'])
+@main.route('/obtenerPeliculasLista', methods=['POST'])
 def obtener_peliculas_lista():
     has_access = Security.verify_token(request.headers)
     if has_access:

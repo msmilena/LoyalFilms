@@ -33,20 +33,7 @@ function Perfil() {
         setPestanaActiva(pestana);
     };
 
-    const handleUpload = () => {
-        if (selectedFile) {
-            //const formData = new FormData();
-            //formData.append('file', selectedFile);
-
-             ////Aqu� deber�as enviar formData a tu servidor para guardar la foto en la base de datos
-             ////Puedes usar fetch, axios u otra librer�a para hacer la solicitud al servidor
-
-            console.log('Foto seleccionada:', selectedFile);
-        } else {
-            console.log('Selecciona una foto primero.');
-        }
-    };
-    const url = "https://loyalfilms.onrender.com"
+    const url = "http://127.0.0.1:5000"
 
     useEffect(() => {
         let tabs = document.querySelector(".tabs");
@@ -366,37 +353,10 @@ function Perfil() {
 
                                         </div>
                                     </div>
-                                    <button class="btnguardarCambios_Contrase�a">Guardar Cambios</button>
-                                </div>
-                                <div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-                                        {/*<div class="imagenCircular" id="contenedor-imagen">*/}
-                                        {/*    <img id="imagen-seleccionada" src="" alt="Imagen Circular">*/}
-                                        {/*</div>*/}
-
-                                        
-                                        <div style={{
-                                            borderRadius: '50%',
-                                            overflow: 'hidden',
-                                            width: '200px', // ajusta el tama�o de la imagen
-                                            height: '200px', // ajusta el tama�o de la imagen
-                                            border: '0.5px solid rgb(240, 31, 126)',
-                                            backgroundImage: `url(${require('../img/imgPerfil.jpg')})`, // Reemplaza "nombre_de_la_imagen.jpg" con el nombre real de tu imagen
-                                            backgroundSize: 'cover',
-                                            backgroundPosition: 'center',
-                                        }}>
-                                            <img src={selectedFile} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                                        </div>
-
-                                        
-
-                                        <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
-                                        <label htmlFor="file-upload" className="custom-file-upload">
-                                            Subir Foto
-                                        </label>
-                                        <button class="btnguardarCambios_Avatar" onClick={handleUpload}>Guardar Cambios</button>
-                                    </div>
-
+                                    <button class="btnguardarCambios" onClick={guardarCambios}>Guardar Cambios</button>
+                                    {showStatus2 && statusSave2 && (
+                                        <div className="warningLabel1">{statusSave2}</div>
+                                    )}
                                 </div>
                     </div>
                     </div>

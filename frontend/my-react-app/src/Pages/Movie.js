@@ -44,10 +44,10 @@ function Movie() {
     const [idResenaSeleccionada, setIdResenaSeleccionar] = useState(null);
     const [idPelicula, setIdPelicula] = useState(null);
     const [resenas, setResenas] = useState([]);
-    const url = "https://loyalfilms.onrender.com"
+    const url = "http://127.0.0.1:5000"
     useEffect(() => {
-        console.log(vista);
-        console.log(favorita);
+        //console.log(vista);
+        //console.log(favorita);
 
         const id = new URLSearchParams(location.search).get("id");
         setIdPelicula(id)
@@ -58,44 +58,43 @@ function Movie() {
             alert("No se encontró el ID en la URL");
         }
 
-    setIsLoggedIn(!!localStorage.getItem("token")); // Actualizar el estado de isLoggedIn al montar el componente
-    if (isLoggedIn) {
-       console.log(localStorage.getItem("idusuario"))
-      estado_botones(localStorage.getItem("idusuario"), id)
+        setIsLoggedIn(!!localStorage.getItem("token")); // Actualizar el estado de isLoggedIn al montar el componente
+        if (isLoggedIn) {
+            console.log(localStorage.getItem("idusuario"))
+            estado_botones(localStorage.getItem("idusuario"), id)
+        }
+
+    }, [location.search]);
+
+    function obtenerListas(idusuario) {
+
+        fetch(url + `/listas/obtenerListas?idusuario=${idusuario}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Error al obtener las listas del usuario');
+                }
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Aquí maneja el error si ocurriera
+            });
     }
 
-  }, [location.search]);
-
-  function obtenerListas(idusuario) {
-    
-  
-    fetch(url+`/listas/obtenerListas?idusuario=${idusuario}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-      },
-    })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error('Error al obtener las listas del usuario');
-        }
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Aquí maneja el error si ocurriera
-      });
-  }
-  
 
 
     function estado_botones(idusuario, idpelicula) {
-        fetch(url+'/listas/verificarPeliculaEnListas', {
+        fetch(url + '/listas/verificarPeliculaEnListas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,7 +133,7 @@ function Movie() {
     }
 
     function obtenerResena(id) {
-        fetch(url+`/resenas/${id}`, {
+        fetch(url + `/resenas/${id}`, {
             method: "GET",
         })
             .then((response) => response.json())
@@ -154,7 +153,7 @@ function Movie() {
         const id = new URLSearchParams(location.search).get("id");
         console.log(vista);
         console.log('desmarcar vista');
-        fetch(url +'/listas/eliminarPelicula', {
+        fetch(url + '/listas/eliminarPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -188,7 +187,7 @@ function Movie() {
         console.log(vista);
         console.log('marcar vista');
         const id = new URLSearchParams(location.search).get("id");
-        fetch(url+'/listas/anadirPelicula', {
+        fetch(url + '/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -222,7 +221,7 @@ function Movie() {
     function desmarcarFavorita() {
         const id = new URLSearchParams(location.search).get("id");
 
-        fetch(url+'/listas/eliminarPelicula', {
+        fetch(url + '/listas/eliminarPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -254,7 +253,7 @@ function Movie() {
 
     function marcarFavorita() {
         const id = new URLSearchParams(location.search).get("id");
-        fetch(url+'/listas/anadirPelicula', {
+        fetch(url + '/listas/anadirPelicula', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -293,7 +292,7 @@ function Movie() {
     }
 
     function eliminarResena(idresena) {
-        fetch(url+`/resenas/${idresena}`, {
+        fetch(url + `/resenas/${idresena}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -434,29 +433,15 @@ function Movie() {
                     Me gusta
                   </button>
                 </div>
-                <div className="boton">
-                  <div className="contenedorIcono abrirLogin"
-                    onClick={() => {
-                      if (window.innerWidth <= 600) {
-                        setshowListPopUp(false);
-                        console.log("show:", showListPopUp);
-                      } else {
-                        setshowListPopUp(true);
-                        obtenerListas(localStorage.getItem("idusuario"));
-                        console.log("hola paso por listas")
-                      }
-                    }}>
-                    <IoIosAddCircleOutline
-                      style={{
-                        color: "#C40E61",
-                        width: "100%",
-                        height: "100%",
-                      }}
-                    />
-
-                                    </div>
-                                    Añadir a lista
-                                </div>
+                {/* <div className="boton">
+                <button id="botonMarcado" className="boton" iddisabled={!isLoggedIn}>
+                <IoIosAddCircleOutline
+                      size={50} style={{ color: "#C40E61", textAlign:"center" }}
+                    />  
+                    Añadir a lista
+                     </button>
+                </div> */}
+                                    
                             </div>
 
                             <div className="filaRating">
@@ -581,8 +566,8 @@ function Movie() {
                     showLoginPopup={showLoginPopup}
                     setShowLoginPopup={setShowLoginPopup}
                 />
-            </main>
-        </div>
+            </main >
+        </div >
     );
 }
 

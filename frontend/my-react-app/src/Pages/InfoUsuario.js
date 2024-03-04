@@ -15,7 +15,7 @@ function InfoUsuario() {
     const [peliculasFavoritas, setpeliculasFavoritas] = useState([]);
     const [idUser, setIdUsername] = useState(localStorage.getItem("idusuario") || "");
     const [datosUsuario, setDatosUsuario] = useState([]);
-    const url = "https://loyalfilms.onrender.com"
+    const url = "http://127.0.0.1:5000"
     useEffect(() => {
         obtenerDatosUsuario();
         obtenerPeliculasFavoritas();
@@ -61,10 +61,14 @@ function InfoUsuario() {
     function obtenerPeliculasFavoritas() {
         const token = localStorage.getItem('token');
         fetch(url+'/movies/tendencias', {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({
+                idusuario: idUser,
+                nombrelista: "Peliculas Favoritas"
+            }),
         })
 
             .then(response => response.json())
@@ -77,7 +81,6 @@ function InfoUsuario() {
     const editarPerfil = () => {
         navigate(`/perfil`);
     };
-
     const eliminarPerfil = async () => {
         try {
             const response = await fetch(url+"/user/eliminarPerfil", {

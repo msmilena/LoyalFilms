@@ -18,7 +18,7 @@ export function Resultados() {
 
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-  const url = "https://loyalfilms.onrender.com"
+  const url = "http://127.0.0.1:5000"
   // Función para buscar películas por la palabra clave y página
   const buscarPeliculas = async () => {
     try {

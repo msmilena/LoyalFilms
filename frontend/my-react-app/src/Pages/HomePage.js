@@ -22,7 +22,7 @@ function HomePage() {
 
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
   
-  const url = "https://loyalfilms.onrender.com"
+  const url = "http://127.0.0.1:5000"
 
   function obtenerNuevasPeliculas() {
     const token = localStorage.getItem('token');

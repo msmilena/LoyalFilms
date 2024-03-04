@@ -17,7 +17,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
   const [statusRegister, setstatusRegister] = useState("");
   const [showStatus, setShowStatus] = useState(false);
   const [showWarning, setShowWarning] = useState(false); // New state variable for showing warning
-  const url = "https://loyalfilms.onrender.com"
+  const url = "http://127.0.0.1:5000"
   // const navigate = useNavigate();
 
   const onButtonClick = async () => {

@@ -14,7 +14,7 @@ const Login = ({ onClose, onRegisterClick }) => {
   const [showWarning, setShowWarning] = useState(false); // New state variable for showing warning
 
   const navigate = useNavigate();
-  const url = "https://loyalfilms.onrender.com"
+  const url = "http://127.0.0.1:5000"
 
   const onButtonClick = async () => {
     // Validación básica (puedes personalizarla según tus necesidades)
