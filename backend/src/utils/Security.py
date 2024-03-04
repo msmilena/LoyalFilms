@@ -13,7 +13,7 @@ class Security():
     def generate_token(cls, authenticated_user):
         payload = {
             'iat': datetime.datetime.now(tz=cls.tz),
-            'exp': datetime.datetime.now(tz=cls.tz) + datetime.timedelta(minutes=10),
+            'exp': datetime.datetime.now(tz=cls.tz) + datetime.timedelta(minutes=180),
             'username': authenticated_user.username,
             'password': authenticated_user.password,
             'admin': authenticated_user.isadmin
