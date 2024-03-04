@@ -31,7 +31,6 @@ class Security():
                 try:
                     payload = jwt.decode(encoded_token, cls.secret, algorithms=["HS256"])
                     roles = payload['admin'] 
-                    print(roles)
                     if roles == True:
                         return True
                     return False

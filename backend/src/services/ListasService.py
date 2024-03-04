@@ -37,7 +37,7 @@ class ListasService():
         except Exception as ex:
             raise CustomException(ex)
     @classmethod
-    def añadir_pelicula(cls, peliculaLista):
+    def anadir_pelicula(cls, peliculaLista):
         try:
             db = get_connection()
             id_usuario = peliculaLista.idusuario

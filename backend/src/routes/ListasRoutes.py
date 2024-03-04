@@ -41,8 +41,8 @@ def crear_lista():
        return response, 401
     
 
-@main.route('/añadirPelicula', methods=['POST'])
-def añadir_pelicula():
+@main.route('/anadirPelicula', methods=['POST'])
+def anadir_Pelicula():
     has_access = Security.verify_token(request.headers)
     if has_access:
     # para crear una lista necesita idusuario, nombre lista, descripcion lista
@@ -63,7 +63,7 @@ def añadir_pelicula():
                 return jsonify({'message': "Falta el nombre de la película", 'success': False}), 400
             
             _peliculaLista = peliculaLista( id_usuario, nombre_lista, id_pelicula, nombre_pelicula)
-            pelicula_agregada=ListasService.añadir_pelicula(_peliculaLista)
+            pelicula_agregada=ListasService.anadir_pelicula(_peliculaLista)
             if pelicula_agregada['success']:
                 return jsonify({'success': True, 'message': pelicula_agregada['message']})
             else:
@@ -103,6 +103,7 @@ def obtener_peliculas_lista():
     has_access = Security.verify_token(request.headers)
     if has_access:
         data = request.json
+        print(data)
         id_usuario = data.get('idusuario')
         nombre_lista = data.get('nombreLista')
 

@@ -128,7 +128,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
   };
 
   return (
-    <div className={"popUpContainer"} style={{paddingTop: "50vh"}}>
+    <div className={"popUpContainer"} style={{paddingTop: "25vh"}}>
       <IoIosCloseCircleOutline
         className={"closeButton"}
         onClick={onCloseRegister}
@@ -210,7 +210,8 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
             type="checkbox"
             id="rememberMe"
             name="rememberMe"
-            className={"checkbox"} />
+                      className={"checkbox"}
+                      style={{ width: '5%' }} />
           <label htmlFor="rememberMe" className="texto">Aceptar términos y condiciones</label>
         </div>
       </div>
