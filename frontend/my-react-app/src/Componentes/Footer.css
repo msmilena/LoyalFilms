@@ -16,14 +16,19 @@ img {
 .contenido-footer {
     position: absolute;
     top: 0; /* Ajusta la posición verticalmente según tus necesidades */
-    left: 70%; /* Centra horizontalmente */
+    /*left: 70%;*/ /* Centra horizontalmente */
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.botones{
+.botones {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    gap: 80px;
+    /*gap: 80px;*/
+    width: 70%;
+    flex-wrap: wrap;
 }
 
 button.abrirLogin{
@@ -32,11 +37,12 @@ button.abrirLogin{
 
 .botones li button,
 .botones li a,
-.botones li{
+.botones li {
     list-style: none;
     text-decoration: none;
     color: #444444;
-    font-size: 18px;
+    /*font-size: 18px;*/
+    font-size: 2vw;
     font-weight: 500;
     transition: 0.3s ease-in-out;
 }

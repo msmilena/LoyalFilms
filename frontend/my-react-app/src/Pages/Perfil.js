@@ -5,41 +5,35 @@ import Section from '../Componentes/Section.jsx';
 import Footer from '../Componentes/Footer.jsx';
 //import Login from '../Pages/Login.js';
 import '../Componentes/Homepage.css';
-import imgPerfil from '../img/imgPerfil.jpg';
+import imgPerfil from '../img/imgPerfil.png';
 import "../css/Perfil.css";
 function Perfil() {
 
     const [showLoginPopup, setShowLoginPopup] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [biografia, setBiografia] = useState("");
+    const [lastname, setLastname] = useState("");
+    const [idUser, setIdUsername] = useState(localStorage.getItem("idusuario") || "");
+    const [datosUsuario, setDatosUsuario2] = useState([]);
+    const [pestanaActiva, setPestanaActiva] = useState('part1');
+    const [statusSave1, setstatusSave1] = useState("");
+    const [showStatus1, setShowStatus1] = useState(false);
+    const [statusSave2, setstatusSave2] = useState("");
+    const [showStatus2, setShowStatus2] = useState(false);
+    const [changeUsername, setchangeUsername] = useState(false);
+    const [changeEmail, setchangeEmail] = useState(false);
     const [password, setPassword] = useState("");
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [newpassword, setNewPassword] = useState("");
+    const [confirmNewPassword, setconfirmNewPassword] = useState("");
 
-    const handleFileChange = (e) => {
-        //setSelectedFile(e.target.files[0]);
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                setSelectedFile(e.target.result);
-            }
-            reader.readAsDataURL(file);
-        }
+
+    const seleccionarPestana = (pestana) => {
+        setPestanaActiva(pestana);
     };
 
-    const handleUpload = () => {
-        if (selectedFile) {
-            //const formData = new FormData();
-            //formData.append('file', selectedFile);
 
-             ////Aquí deberías enviar formData a tu servidor para guardar la foto en la base de datos
-             ////Puedes usar fetch, axios u otra librería para hacer la solicitud al servidor
-
-            console.log('Foto seleccionada:', selectedFile);
-        } else {
-            console.log('Selecciona una foto primero.');
-        }
-    };
 
     useEffect(() => {
         let tabs = document.querySelector(".tabs");
@@ -56,7 +50,149 @@ function Perfil() {
                 tabContentNodes[i].classList.add("active");
             });
         }
+        obtenerDatosUsuario();
+        
     }, []); 
+
+
+
+    function obtenerDatosUsuario() {
+        try {
+            const url = `http://localhost:5000/user/info?idUser=${idUser}`;
+            console.log(idUser);
+            //url.searchParams.append("idUser", idUser);
+
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then(response => {
+                if (response.ok) {
+                    response.json().then(data => {
+                        setDatosUsuario2(data.userData);
+                        if (data.userData !=null) {
+                            setUsername(data.userData.username);
+                            setEmail(data.userData.email);
+                            setName(data.userData.name);
+                            setLastname(data.userData.lastname);
+                            setBiografia(data.userData.biografia);
+                            setPassword(data.userData.password);
+                        }
+                    });
+                } else {
+                    response.json().then(errorData => {
+                        console.error("Error:", errorData);
+
+                        //setShowWarning(true);
+                    });
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+                //setShowWarning(true);
+            });
+        } catch (error) {
+            console.error("Error:", error);
+            //setShowWarning(true);
+        }
+    }
+
+
+    const guardarCambios = async () => {
+        setstatusSave1("");
+        setShowStatus1(false);
+        setstatusSave2("");
+        setShowStatus2(false);
+        console.log(idUser, username, name, lastname, email, biografia, changeUsername, changeEmail);
+        if (pestanaActiva === 'part1') {
+            try {
+                const response = await fetch("http://localhost:5000/user/guardarDatos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        idUser: idUser,
+                        username: username,
+                        name: name,
+                        lastname: lastname,
+                        email: email,
+                        biografia: biografia,
+                        changeUsername: changeUsername,
+                        changeEmail: changeEmail
+                    }),
+                });
+
+                // Maneja la respuesta del servidor
+                if (response.ok) {
+                    setstatusSave1(
+                        <div className="warningLabel2">
+                            Guardado exitoso!
+                        </div>
+                    );
+                    setShowStatus1(true);
+                } else {
+                    // Maneja errores de la solicitud al servidor
+                    const errorData = await response.json();
+                    setstatusSave1(errorData.message);
+                    setShowStatus1(true);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            console.log('Guardando cambios del primer tab');
+        } else if (pestanaActiva === 'part2') {
+            if (password == newpassword) {
+                setstatusSave2(
+                    <div className="warningLabel2">
+                        La nueva contrasena es igual a la antigua!
+                    </div>
+                );
+                setShowStatus2(true);
+
+            } else if (newpassword !== confirmNewPassword) {
+                setstatusSave2(
+                    <div className="warningLabel2">
+                        Las contrasenas nuevas no coinciden!
+                    </div>
+                );
+                setShowStatus2(true);
+            } else{
+                        try {
+                            const response = await fetch("http://localhost:5000/user/editarContrasena", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                },
+                                body: JSON.stringify({
+                                    idUser: idUser,
+                                    newpassword: newpassword
+                                }),
+                            });
+
+                            // Maneja la respuesta del servidor
+                            if(response.ok) {
+                        setstatusSave2(
+                            <div className="warningLabel2">
+                                Guardado exitoso!
+                            </div>
+                        );
+                        setShowStatus1(true);
+                    } else {
+                        // Maneja errores de la solicitud al servidor
+                        const errorData = await response.json();
+                        setstatusSave2(errorData.message);
+                        setShowStatus2(true);
+                    }
+                } catch (error) {
+                    console.log(error);
+                }
+
+            }
+            // Guardar cambios del segundo tab
+            console.log('Guardando cambios del segundo tab');
+        }
+    };
 
 
     return (
@@ -72,11 +208,19 @@ function Perfil() {
                 <h1 class="h1DatosPerfil">Datos Perfil</h1>
                 <div class="tabs">
                     <div class="tab-header">
-                    <div class="active">
+                                <div
+                                    id="part1"
+                                    class={pestanaActiva === 'part1' ? 'active' : ''}
+                                    onClick={() => seleccionarPestana('part1')}
+                                >
                         Perfil
                     </div>
-                        <div>Contrase&ntilde;a</div>
-                    <div>Avatar</div>
+                                <div
+                                    id="part2"
+                                    class={pestanaActiva === 'part2' ? 'active' : ''}
+                                    onClick={() => seleccionarPestana('part2')}
+                                >Contrase&ntilde;a</div>
+                    {/*<div>Avatar</div>*/}
                     </div>
                 <div class="tab-content">
                                 <div class="active">
@@ -89,10 +233,11 @@ function Perfil() {
                                             <input
                                                 value={username}
                                                 placeholder="Ingresa nombre de usuario"
-                                                onChange={ev => setUsername(ev.target.value)}
+                                                onChange={(ev) => {
+                                                    setUsername(ev.target.value);
+                                                    setchangeUsername(true);
+                                                }}
                                                 className={"inputBox"} />
-                                            {/*<label className="errorLabel">{usernameError}</label>*/}
-                                            {/*{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
                                             </div>
                                     </div>
                                     <div class="w50 dflex" style={{ gap: '10px' }}>
@@ -103,12 +248,10 @@ function Perfil() {
 
                                             <div className={"inputContainer"}>
                                                 <input
-                                                    value={username}
+                                                    value={name}
                                                     placeholder="Ingresa su Nombre"
-                                                    onChange={ev => setUsername(ev.target.value)}
+                                                    onChange={ev => setName(ev.target.value)}
                                                     className={"inputBox"} />
-                                                {/*<label className="errorLabel">{usernameError}</label>*/}
-                                                {/*{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
                                             </div>
                                         </div>
                                         <div class="w50">
@@ -118,12 +261,11 @@ function Perfil() {
 
                                             <div className={"inputContainer"}>
                                                 <input
-                                                    value={username}
+                                                    value={lastname}
                                                     placeholder="Ingresa su Apellido"
-                                                    onChange={ev => setUsername(ev.target.value)}
+                                                    onChange={ev => setLastname(ev.target.value)}
                                                     className={"inputBox"} />
-                                                {/*<label className="errorLabel">{usernameError}</label>*/}
-                                                {/*{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
+
                                             </div>
                                         </div>
                                     </div>
@@ -134,10 +276,13 @@ function Perfil() {
 
                                         <div className={"inputContainer"}>
                                             <input
+                                                value={email}
                                                 type={'email'}
-                                                value={username}
                                                 placeholder="Ingresa nombre de usuario"
-                                                onChange={ev => setUsername(ev.target.value)}
+                                                onChange={(ev) => {
+                                                    setEmail(ev.target.value);
+                                                    setchangeEmail(true);
+                                                }}
                                                 className={"inputBox"} />
                                             {/*<label className="errorLabel">{usernameError}</label>*/}
                                             {/*{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
@@ -148,17 +293,19 @@ function Perfil() {
                                             Biografia
                                         </div>                   
                                             <textarea
-                                                value={username}
+                                            value={biografia}
                                                 placeholder="Ingresa tu historia"
-                                                onChange={ev => setUsername(ev.target.value)}
+                                                onChange={ev => setBiografia(ev.target.value)}
                                             className={"inputContainer inputBox"}
                                             />
-                                            {/*<label className="errorLabel">{usernameError}</label>*/}
-                                            {/*{showWarning && usernameError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
+
                                         
 
                                     </div>
-                                    <button class="btnguardarCambios">Guardar Cambios</button>
+                                    <button class="btnguardarCambios" onClick={guardarCambios}>Guardar Cambios</button>
+                                    {showStatus1 && statusSave1 && (
+                                        <div className="warningLabel1">{statusSave1}</div>
+                                    )}
                                 </div>
                                 <div>
                                     <div class="w50">
@@ -173,8 +320,7 @@ function Perfil() {
                                                 onChange={ev => setPassword(ev.target.value)}
                                                 className={"inputBox"}
                                             />
-                                            {/*<label className="errorLabel">{passwordError}</label>*/}
-                                            {/*{showWarning && passwordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
+
                                         </div>
                                     </div>
                                     <div class="w50">
@@ -184,13 +330,12 @@ function Perfil() {
                                         <div className={"inputContainer"}>
                                             <input
                                                 type="password"
-                                                value={password}
+                                                value={newpassword}
                                                 placeholder="Ingresa tu Nueva Contrase&ntilde;a"
-                                                onChange={ev => setPassword(ev.target.value)}
+                                                onChange={ev => setNewPassword(ev.target.value)}
                                                 className={"inputBox"}
                                             />
-                                            {/*<label className="errorLabel">{passwordError}</label>*/}
-                                            {/*{showWarning && passwordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
+
                                         </div>
                                     </div>
                                     <div class="w50">
@@ -200,46 +345,18 @@ function Perfil() {
                                         <div className={"inputContainer"}>
                                             <input
                                                 type="password"
-                                                value={password}
+                                                value={confirmNewPassword}
                                                 placeholder="Ingresa Contrase&ntilde;a Actual"
-                                                onChange={ev => setPassword(ev.target.value)}
+                                                onChange={ev => setconfirmNewPassword(ev.target.value)}
                                                 className={"inputBox"}
                                             />
-                                            {/*<label className="errorLabel">{passwordError}</label>*/}
-                                            {/*{showWarning && passwordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
+
                                         </div>
                                     </div>
-                                    <button class="btnguardarCambios_Contraseña">Guardar Cambios</button>
-                                </div>
-                                <div>
-                                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
-                                        {/*<div class="imagenCircular" id="contenedor-imagen">*/}
-                                        {/*    <img id="imagen-seleccionada" src="" alt="Imagen Circular">*/}
-                                        {/*</div>*/}
-
-                                        
-                                        <div style={{
-                                            borderRadius: '50%',
-                                            overflow: 'hidden',
-                                            width: '200px', // ajusta el tamaño de la imagen
-                                            height: '200px', // ajusta el tamaño de la imagen
-                                            border: '0.5px solid rgb(240, 31, 126)',
-                                            backgroundImage: `url(${require('../img/imgPerfil.jpg')})`, // Reemplaza "nombre_de_la_imagen.jpg" con el nombre real de tu imagen
-                                            backgroundSize: 'cover',
-                                            backgroundPosition: 'center',
-                                        }}>
-                                            <img src={selectedFile} alt="" style={{ width: '100%', height: 'auto', display: 'block' }} />
-                                        </div>
-
-                                        
-
-                                        <input id="file-upload" type="file" onChange={handleFileChange} style={{ display: 'none' }} accept="image/*" />
-                                        <label htmlFor="file-upload" className="custom-file-upload">
-                                            Subir Foto
-                                        </label>
-                                        <button class="btnguardarCambios_Avatar" onClick={handleUpload}>Guardar Cambios</button>
-                                    </div>
-
+                                    <button class="btnguardarCambios" onClick={guardarCambios}>Guardar Cambios</button>
+                                    {showStatus2 && statusSave2 && (
+                                        <div className="warningLabel1">{statusSave2}</div>
+                                    )}
                                 </div>
                     </div>
                     </div>

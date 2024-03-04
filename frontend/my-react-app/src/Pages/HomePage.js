@@ -21,10 +21,12 @@ function HomePage() {
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
+  
+  const url = "https://loyalfilms.onrender.com"
 
   function obtenerNuevasPeliculas() {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:5000/movies/nuevas', {
+    fetch(url +'/movies/nuevas', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -39,7 +41,7 @@ function HomePage() {
 
   function obtenerTendencias() {
     const token = localStorage.getItem('token');
-    fetch('http://localhost:5000/movies/tendencias', {
+    fetch( url +'/movies/tendencias', {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`

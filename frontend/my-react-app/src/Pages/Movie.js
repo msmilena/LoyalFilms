@@ -66,7 +66,7 @@ function Movie() {
 
 
   function estado_botones(idusuario, idpelicula) {
-    fetch('/listas/verificarPeliculaEnListas', {
+    fetch(url+'/listas/verificarPeliculaEnListas', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ function Movie() {
       });
   }
   function obtenerPelicula(id) {
-    fetch(`http://localhost:5000/movies/informacion?id=${id}`, {
+    fetch(url+`/movies/informacion?id=${id}`, {
       method: "GET",
     })
       .then((response) => response.json())
@@ -156,7 +156,7 @@ function Movie() {
 
   function marcarVista() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+    fetch(url +'/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ function Movie() {
 
   function marcarFavorita() {
     const id = new URLSearchParams(location.search).get("id");
-    fetch('http://127.0.0.1:5000/listas/añadirPelicula', {
+    fetch(url +'/listas/añadirPelicula', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -454,8 +454,8 @@ function Movie() {
                 </div>
                 Calificar
               </div>
-              <div className="fila" style={{ justifyContent: "center" }}>
-                <div className="boton">
+              <div className="fila" style={{ justifyContent: "center", borderBottom: '0px solid #00000047', paddingBottom: '0px' }}>
+              <div className="boton">
                   <div className="contenedorIcono">
                     <FaRegShareFromSquare
                       style={{
@@ -471,7 +471,7 @@ function Movie() {
             </div>
           </div>
           <div className="infoMovie2">
-            <h1 className="titulo_pelicula">{infoPelicula.title}</h1>
+                      <h1 className="titulo_pelicula">{infoPelicula.title}({infoPelicula.year_release})</h1>
             <p className="info_titulo">Calificación</p>
             <div className="contenedorRating">
               <CircularProgressbar
@@ -499,7 +499,7 @@ function Movie() {
                 }}
               />
             </div>
-            <p>{infoPelicula.year_release} </p>
+            {/*<p>{infoPelicula.year_release} </p>*/}
             <p className="info_titulo"> Dirigida por </p>
             <p> {infoPelicula.director}</p>
 

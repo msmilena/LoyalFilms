@@ -18,6 +18,7 @@ class AuthService():
             user_data = user_ref.get()
             for doc in user_data:
             # Iterar sobre la lista de documentos
+                print(doc.id)
                 doc_data = doc.to_dict()
                 print(f"Datos del usuario: {doc_data}")
                 # Verificar si 'isadmin' está presente en doc_data
