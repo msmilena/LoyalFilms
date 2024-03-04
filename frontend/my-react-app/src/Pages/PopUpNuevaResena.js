@@ -59,7 +59,7 @@ const PopUpNuevaResena = ({ onCloseResena }) => {
                 <div className="subtitulo">Descripción</div>
             </div>
             <textarea
-            placeholder="Ingresa descripción de la lista"
+            placeholder="Ingresa descripción de la reseña"
             className={"inputBoxDes"}
           />
             <input className={"listbtn"} type="button" value={"Guardar"} />
