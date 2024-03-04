@@ -32,8 +32,8 @@ function Perfil() {
             //const formData = new FormData();
             //formData.append('file', selectedFile);
 
-             ////Aquí deberías enviar formData a tu servidor para guardar la foto en la base de datos
-             ////Puedes usar fetch, axios u otra librería para hacer la solicitud al servidor
+             ////Aquï¿½ deberï¿½as enviar formData a tu servidor para guardar la foto en la base de datos
+             ////Puedes usar fetch, axios u otra librerï¿½a para hacer la solicitud al servidor
 
             console.log('Foto seleccionada:', selectedFile);
         } else {
@@ -209,7 +209,7 @@ function Perfil() {
                                             {/*{showWarning && passwordError && <IoIosWarning style={{ color: '#F92323' }}>  </IoIosWarning>}*/}
                                         </div>
                                     </div>
-                                    <button class="btnguardarCambios_Contraseña">Guardar Cambios</button>
+                                    <button class="btnguardarCambios_Contraseï¿½a">Guardar Cambios</button>
                                 </div>
                                 <div>
                                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}>
@@ -221,8 +221,8 @@ function Perfil() {
                                         <div style={{
                                             borderRadius: '50%',
                                             overflow: 'hidden',
-                                            width: '200px', // ajusta el tamaño de la imagen
-                                            height: '200px', // ajusta el tamaño de la imagen
+                                            width: '200px', // ajusta el tamaï¿½o de la imagen
+                                            height: '200px', // ajusta el tamaï¿½o de la imagen
                                             border: '0.5px solid rgb(240, 31, 126)',
                                             backgroundImage: `url(${require('../img/imgPerfil.jpg')})`, // Reemplaza "nombre_de_la_imagen.jpg" con el nombre real de tu imagen
                                             backgroundSize: 'cover',
