@@ -6,7 +6,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background: white;
-    padding: 150px 25px 25px 25px;
+    padding: 50px 25px 25px 25px;
     border: 1px solid #ccc;
     z-index: 99999; /* Set a higher value to display above all content */
     display: flex;
@@ -115,4 +115,66 @@
         border-radius: 0;
         box-shadow: none;
     }
+}
+
+
+/* Estilos: PopUpLista */
+
+.btnNueva button{
+    font-family: 'Inter', sans-serif;
+    background-color: white;
+    color: #C40E61; 
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btnNueva button svg {
+    vertical-align: middle; /* Alinea verticalmente el icono con el texto */
+    margin-right: 5px; /* Añade espacio entre el icono y el texto (ajusta según sea necesario) */
+}
+
+.btnNueva button:hover{
+    background-color: #F6F4FF;
+}
+
+.listascontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 2vh 0 2vh 0;
+    width: 100%;
+
+}
+
+.lista{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    padding: 3%;
+    background-color: #F6F4FF;
+    cursor: pointer;
+    border-top: 1px solid rgba(80, 74, 121, 0.5);
+}
+
+.lista:hover{
+    background-color: #EAE8FF;
+}
+
+.listbtn{
+    background-color: #C40E61;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 2vh 0 1vh 0;
+    cursor: pointer;
+    width: 30%;
+}
+.sinBordeSuperior{
+    border-top: none;
 }

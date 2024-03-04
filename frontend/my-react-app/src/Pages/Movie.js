@@ -9,18 +9,19 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { FaRegHeart } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegShareFromSquare } from "react-icons/fa6";
-import Fuego from '../img/Fuego.png';
-import {FaStar} from 'react-icons/fa';
+import Fuego from "../img/Fuego.png";
+import { FaStar } from "react-icons/fa";
 import { LuUser2 as User } from "react-icons/lu";
 import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
-
+import PopUpLista from "./PopUpLista";
 
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const imageUrl = "https://image.tmdb.org/t/p/w342" + infoPelicula.poster_path;
   const location = useLocation();
+  const [showListPopUp, setshowListPopUp] = useState(false);
 
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("id");
@@ -44,85 +45,76 @@ function Movie() {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
   const numeroDeResenas = 2; // Puedes ajustar esto según el número deseado de repeticiones
-
+  console.log("a",showListPopUp )
   const resenas = Array.from({ length: numeroDeResenas }, (_, index) => (
-  <div className="resenaContenedor" key={index}>
-  <div className="fila">
-  <div className="usuarioResena">
-  <User size={30} style={{ color: "#C40E61", marginRight: "5px" }} />
-    Anónimo
-  </div>
-  <div className="fecha">
-    4/01/2024
-  </div>
-  </div>
-  
-  <div className="calificacionResena">
-    <p>Calificación </p>
-    <div className="contenedorRating">
-        <CircularProgressbar
-          value={infoPelicula.porcentaje}
-          text={`${infoPelicula.puntaje}`}
-          background
-          strokeWidth={15}
-          styles={{
-            path: {
-              stroke: `rgba(34, 3, 255, ${
-                infoPelicula.porcentaje / 100
-              })`,
-              transition: "stroke-dashoffset 0.5s ease 0s",
-            },
-            trail: {
-              stroke: "#140294",
-            },
-            text: {
-              fill: "#FFFFFF",
-              fontSize: "1.5rem",
-              fontWeight: "bold",
-            },
-            background: {
-              fill: "#000000",
-            },
-          }}
-        />
+    <div className="resenaContenedor" key={index}>
+      <div className="fila">
+        <div className="usuarioResena">
+          <User size={30} style={{ color: "#C40E61", marginRight: "5px" }} />
+          Anónimo
+        </div>
+        <div className="fecha">4/01/2024</div>
       </div>
-  </div>
-  <div className="comentario">
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras metus nisi, 
-aliquam at libero bibendum, commodo condimentum erat. Sed pellentesque est dolor. Sed sed lorem semper, faucibus magna eu, aliquam odio. 
-  </div>
-  <div className="fila">
-  <div className="botonResena">
-      <button>
-        <FaRegShareFromSquare 
-          style={{ color: "#E8E8E8", size: "30px" }} 
-          />
-        Compartir
-      </button>
-  </div>
-  <div className="botonResena">
-      <button>
-        <FaRegEdit 
 
-          style={{ color: "#E8E8E8", size: "30px" }} 
+      <div className="calificacionResena">
+        <p>Calificación </p>
+        <div className="contenedorRating">
+          <CircularProgressbar
+            value={infoPelicula.porcentaje}
+            text={`${infoPelicula.puntaje}`}
+            background
+            strokeWidth={15}
+            styles={{
+              path: {
+                stroke: `rgba(34, 3, 255, ${infoPelicula.porcentaje / 100})`,
+                transition: "stroke-dashoffset 0.5s ease 0s",
+              },
+              trail: {
+                stroke: "#140294",
+              },
+              text: {
+                fill: "#FFFFFF",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+              },
+              background: {
+                fill: "#000000",
+              },
+            }}
           />
-        Editar Reseña
-      </button>
-  </div>
-  <div className="botonResena">
-      <button>
-        <FaRegTrashAlt  
-          style={{ color: "#E8E8E8", size: "30px" }} 
-          />
-        Eliminar Reseña
-      </button>
-  </div>
-  </div>
-  
-</div>
-));
+        </div>
+      </div>
+      <div className="comentario">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras metus
+        nisi, aliquam at libero bibendum, commodo condimentum erat. Sed
+        pellentesque est dolor. Sed sed lorem semper, faucibus magna eu, aliquam
+        odio. 
+      </div>
+      <div className="fila">
+        <div className="botonResena">
+          <button>
+            <FaRegShareFromSquare style={{ color: "#E8E8E8", size: "30px" }} />
+            Compartir
+          </button>
+        </div>
+        <div className="botonResena">
+          <button>
+            <FaRegEdit style={{ color: "#E8E8E8", size: "30px" }} />
+            Editar Reseña
+          </button>
+        </div>
+        <div className="botonResena">
+          <button>
+            <FaRegTrashAlt style={{ color: "#E8E8E8", size: "30px" }} />
+            Eliminar Reseña
+          </button>
+        </div>
+      </div>
+    </div>
+  ));
   return (
-    <div>
+    <div className={`page ${showLoginPopup || showListPopUp ? 'popupActive' : ''}`}>
+      {showListPopUp && <PopUpLista onCloseList={() => setshowListPopUp(false)} />} 
       <header>
         <Navbar
           showLoginPopup={showLoginPopup}
@@ -139,84 +131,97 @@ aliquam at libero bibendum, commodo condimentum erat. Sed pellentesque est dolor
               <div className="fila">
                 <div className="boton">
                   <div className="contenedorIcono">
-                  <MdOutlineRemoveRedEye
-                    style={{ color: "#C40E61", width: "100%", height: "100%"}}
-                    
-                  />
+                    <MdOutlineRemoveRedEye
+                      style={{
+                        color: "#C40E61",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
                   </div>
-                  
                   Ver
                 </div>
                 <div className="boton">
-                <div className="contenedorIcono">
-                <FaRegHeart  
-                style={{ color: "#C40E61", width: "100%", height: "100%" }} />
-                </div>
-
-                  
+                  <div className="contenedorIcono">
+                    <FaRegHeart
+                      style={{
+                        color: "#C40E61",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </div>
                   Me gusta
                 </div>
                 <div className="boton">
-                
-                <div className="contenedorIcono">
-                <IoIosAddCircleOutline
-                    style={{ 
-                    color: "#C40E61", 
-                    width: "100%", 
-                    height: "100%"  
-                  }}
+                  <div className="contenedorIcono abrirLogin"
+                  onClick= {() => {
+                    if (window.innerWidth <= 600) {
+                      setshowListPopUp(false);
+                      console.log("show:", showListPopUp);
+                    } else {
+                      setshowListPopUp(true);
+                    }
+                  }}>
+                    <IoIosAddCircleOutline
+                      style={{
+                        color: "#C40E61",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
                     
-                  />
-                </div>
-
-                  
+                  </div>
                   Añadir a lista
                 </div>
               </div>
 
               <div className="filaRating">
                 <div className="ratingEstrellas">
-                    {[...Array(5)].map((star, index) => {
-                      const ratingActual = index+1;
-                      return(
-                        <label key={index}>
-                          <input
+                  {[...Array(5)].map((star, index) => {
+                    const ratingActual = index + 1;
+                    return (
+                      <label key={index}>
+                        <input
                           type="radio"
                           name="rating"
                           value={ratingActual}
                           onClick={() => setRating(ratingActual)}
-                          />
-                          <FaStar 
-                          className="star" 
-                          style={{  width: "100%", height: "100%"  }}
-                          color={ratingActual <= (hover || rating) ? "#a69bff" : "#d6d6d6"}
+                        />
+                        <FaStar
+                          className="star"
+                          style={{ width: "100%", height: "100%" }}
+                          color={
+                            ratingActual <= (hover || rating)
+                              ? "#a69bff"
+                              : "#d6d6d6"
+                          }
                           onMouseEnter={() => setHover(ratingActual)}
                           onMouseLeave={() => setHover(null)}
-                          />
-                        </label>
-                      )
-                    })}
-                    
-              
+                        />
+                      </label>
+                    );
+                  })}
+                </div>
+                Calificar
               </div>
-              Calificar
-            </div>
-            <div  className="fila" style={{ justifyContent: "center" }} >
+              <div className="fila" style={{ justifyContent: "center" }}>
                 <div className="boton">
-                <div className="contenedorIcono">
-                <FaRegShareFromSquare 
-                style={{ color: "#C40E61", width: "100%", height: "100%"  }} 
-                />
-                </div>
-                
-                Compartir
-                
+                  <div className="contenedorIcono">
+                    <FaRegShareFromSquare
+                      style={{
+                        color: "#C40E61",
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    />
+                  </div>
+                  Compartir
                 </div>
               </div>
+            </div>
           </div>
-          
-        </div>
-        <div className="infoMovie2">
+          <div className="infoMovie2">
             <h1 className="titulo_pelicula">{infoPelicula.title}</h1>
             <p className="info_titulo">Calificación</p>
             <div className="contenedorRating">
@@ -249,7 +254,7 @@ aliquam at libero bibendum, commodo condimentum erat. Sed pellentesque est dolor
             <p>{infoPelicula.year_release} </p>
             <p className="info_titulo"> Dirigida por </p>
             <p> {infoPelicula.director}</p>
-            
+
             <p className="info_titulo">Reparto</p>
             <p>
               {infoPelicula.actor1}, {infoPelicula.actor2},{" "}
@@ -258,31 +263,28 @@ aliquam at libero bibendum, commodo condimentum erat. Sed pellentesque est dolor
             <p className="info_titulo">Sinopsis</p>
             <p>{infoPelicula.overview}</p>
           </div>
-         
-        
         </div>
         <div className="mainResena">
-        
-        <div className="section-header">
-        <div className='contenedor-img'>
-          <img src={Fuego} alt="Fuego" />
-        </div>
-        <h2><span>Reseñas</span></h2>
-           
+          <div className="section-header">
+            <div className="contenedor-img">
+              <img src={Fuego} alt="Fuego" />
+            </div>
+            <h2>
+              <span>Reseñas</span>
+            </h2>
+          </div>
+
+          <div className="resenaSection">
+            <div className="botonResena">
+              <button>
+                <IoIosAddCircleOutline size={30} style={{ color: "#E8E8E8" }} />
+                Añadir Reseña
+              </button>
+            </div>
+            {resenas}
+          </div>
         </div>
 
-        <div className="resenaSection">
-        <div className="botonResena">
-            <button>
-              <IoIosAddCircleOutline size={30} style={{ color: "#E8E8E8" }} />
-              Añadir Reseña
-            </button>
-        </div>
-        {resenas}
-        </div>
-        </div>
-        
-        
         <Footer
           showLoginPopup={showLoginPopup}
           setShowLoginPopup={setShowLoginPopup}
