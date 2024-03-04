@@ -128,7 +128,7 @@ const Register = ({ onCloseRegister, onLoginClick }) => {
   };
 
   return (
-    <div className={"popUpContainer"}>
+    <div className={"popUpContainer"} style={{paddingTop: "50vh"}}>
       <IoIosCloseCircleOutline
         className={"closeButton"}
         onClick={onCloseRegister}

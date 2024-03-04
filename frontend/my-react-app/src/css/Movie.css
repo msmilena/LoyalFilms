@@ -11,14 +11,14 @@
 
 .contenedorMovie{
 display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 35% 65%;
   gap: 50px; /* Espacio entre las columnas (ajusta según tus necesidades) */
-  padding: 0 2vw 0 2vw;
+  padding: 0 10vw 0 4vw;
   
 }
 
 .mainResena{
-    padding: 0 2vw 0 2vw;
+    padding: 7vh 2vw 0 2vw;
 }
 
 .contenedorRating{
@@ -32,8 +32,9 @@ display: grid;
 }
 
 .infoMovie2{
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .contenedorImg{
@@ -49,30 +50,45 @@ display: grid;
 
 .info_titulo{
     font-weight:200;
+    font-size: 1.4em;
 }
 
 .titulo_pelicula{
     font-weight:normal;
+    font-size: 3.5em;
+}
+
+.infoMovie2 p{
+    font-size: 1.2em;
+
 }
 
 .contenedorBotones{
     display:grid;
     grid-template-columns: 1fr;
-    gap: 10px;
+    grid-template-rows: 30% 30% 30%;
+    gap: 20px;
+    background-color: #F6F4FF;
+    border-radius: 15px;
+    font-size: 0.90em;
+    justify-items: center;
+    padding: 20px 0 20px 0;
 }
 
 .boton {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items:center;
+    width: 33.33%;
+    height: 100%;
+
 }
 
 .fila{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
-    
+    width: 95%;
 }
 
 .botonResena button{
@@ -85,6 +101,11 @@ display: grid;
     cursor: pointer;
 
 }
+
+.botonResena button:hover{
+    background-color: #FF4E9E;
+}
+
 .botonResena button svg {
     vertical-align: middle; /* Alinea verticalmente el icono con el texto */
     margin-right: 5px; /* Añade espacio entre el icono y el texto (ajusta según sea necesario) */
@@ -93,4 +114,71 @@ display: grid;
     border:none;
     background-color: transparent;
     cursor: pointer;
+}
+
+.ratingEstrellas{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+}
+
+.filaRating{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    justify-items: center;
+    width: 100%;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+.star{
+    cursor: pointer;
+    width: 100%;
+}
+
+.ratingEstrellas label{
+    height: 60%;
+    width: 60%;
+}
+
+.contenedorIcono{
+    height: 60%;
+    width: 60%;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.resenaSection{
+    padding: 0vh 6vw 4vh 6vw;
+}
+.resenaContenedor{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 5vh 0 0 0;
+    padding: 2em;
+    border:  1px solid rgba(80, 74, 121, 0.5);
+    border-radius: 20px;
+}
+
+.calificacionResena{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+}
+
+.usuarioResena{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.4em;
 }
