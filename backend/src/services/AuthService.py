@@ -18,6 +18,7 @@ class AuthService():
             user_data = user_ref.get()
             for doc in user_data:
             # Iterar sobre la lista de documentos
+                print(doc.id)
                 doc_data = doc.to_dict()
                 print(f"Datos del usuario: {doc_data}")
                 # Verificar si 'isadmin' está presente en doc_data
@@ -26,7 +27,7 @@ class AuthService():
                 else:
                     is_admin_value = "False"
                 if doc_data and doc_data['password'] == user.password:
-                    return User( doc_data['username'], doc_data['password'], is_admin_value)
+                    return User( doc_data['username'], doc_data['password'], is_admin_value, doc.id)
                 return None
         except Exception as ex:
             raise CustomException(ex)

@@ -11,6 +11,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { FaRegShareFromSquare } from "react-icons/fa6";
 import Fuego from '../img/Fuego.png';
+import RatingStar from "../Componentes/Rating.jsx";
 
 function Movie() {
   const [infoPelicula, setinfoPelicula] = useState([]);
@@ -74,8 +75,13 @@ function Movie() {
                   />
                   Añadir a lista
                 </div>
-              </div>
-              <div className="fila">
+                          </div>
+               <div className="fila">
+                 <div className="boton">
+                                  <RatingStar  /> 
+                 </div>
+                </div>            
+               <div className="fila" style={{ borderBottom: '0px solid #00000047', paddingBottom: '0px' }}>
                 <div className="boton">
                 
                 <FaRegShareFromSquare size={50} style={{ color: "#C40E61" }} />

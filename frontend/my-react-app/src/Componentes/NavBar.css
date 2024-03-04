@@ -129,13 +129,14 @@ nav img{
     width: auto;
     display: flex;
   }
-  
-  input{
+
+input {
     border: none;
-    background:none ;
+    background: none;
     font-size: 15px;
     outline: none;
-  }
+    width: 100%;
+}
 
   .search-icon {
     position: absolute;

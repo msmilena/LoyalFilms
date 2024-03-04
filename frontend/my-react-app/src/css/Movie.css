@@ -55,10 +55,14 @@ display: grid;
     font-weight:normal;
 }
 
-.contenedorBotones{
-    display:grid;
+.contenedorBotones {
+    display: grid;
     grid-template-columns: 1fr;
     gap: 10px;
+    border: 2px solid #00000047;
+    border-radius: 10px;
+    padding: 10px;
+    background: #F6F4FF;
 }
 
 .boton {
@@ -67,12 +71,34 @@ display: grid;
     align-items: center;
 }
 
-.fila{
+.botonRating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.style-module_simpleStarRating__nWUxf {
+    margin-right: 0px;
+}
+
+.style-module_starRatingWrap__q-lJC {
+    margin-right: 0px;
+}
+
+.style-module_emptyIcons__Bg-FZ {
+    margin-right: 0px;
+}
+.fila {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
-    
+    border-bottom: 2px solid #00000047;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .botonResena button{

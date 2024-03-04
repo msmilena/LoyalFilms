@@ -2,13 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\backend",
+    "\\backend\\src",
+    "\\backend\\src\\services",
     "\\frontend",
     "\\frontend\\my-react-app",
     "\\frontend\\my-react-app\\src",
-    "\\frontend\\my-react-app\\src\\Componentes",
-    "\\frontend\\my-react-app\\src\\img",
-    "\\frontend\\my-react-app\\src\\Pages"
+    "\\frontend\\my-react-app\\src\\img"
   ],
-  "SelectedNode": "\\frontend\\my-react-app",
+  "SelectedNode": "\\frontend\\my-react-app\\src\\img",
   "PreviewInSolutionExplorer": false
 }

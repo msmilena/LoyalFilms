@@ -23,12 +23,12 @@ def login():
     username = data.get('username')  # Ajusta el campo a 'username'
     password = data.get('password')
 
-    _user = User( username, password, None)
+    _user = User( username, password, None,None)
     authenticated_user = AuthService.login_user(_user)
 
     if (authenticated_user != None):
         encoded_token = Security.generate_token(authenticated_user)
-        return jsonify({'success': True, 'token': encoded_token})                                                                                                                                                                                                                    
+        return jsonify({'success': True, 'token': encoded_token, 'idUser': authenticated_user.id})                                                                                                                                                                                                                    
     else:
         response = jsonify({'message': 'Unauthorized'})
         return response, 401

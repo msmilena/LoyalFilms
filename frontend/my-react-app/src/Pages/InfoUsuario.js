@@ -6,17 +6,57 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../Componentes/Footer.jsx';
 //import Login from '../Pages/Login.js';
 import '../Componentes/Homepage.css';
-import imgPerfil from '../img/imgPerfil.jpg';
+import imgPerfil from '../img/imgPerfil.png';
 import "../css/InfoUsuario.css";
 function InfoUsuario() {
 
 
     const [showLoginPopup, setShowLoginPopup] = useState(false);
     const [peliculasFavoritas, setpeliculasFavoritas] = useState([]);
+    const [idUser, setIdUsername] = useState(localStorage.getItem("idUser") || "");
+    const [datosUsuario, setDatosUsuario] = useState([]);
 
     useEffect(() => {
+        obtenerDatosUsuario();
         obtenerPeliculasFavoritas();
-    }, []);
+    }, [localStorage.getItem("token")]);
+
+
+    function obtenerDatosUsuario() {
+        try {
+            const url = `http://localhost:5000/user/info?idUser=${idUser}`;
+            console.log(idUser);
+            //url.searchParams.append("idUser", idUser);
+
+            fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }).then(response => {
+                if (response.ok) {
+                    response.json().then(data => {
+                        console.log(data);
+                        setDatosUsuario(data.userData);
+                    });
+                } else {
+                    response.json().then(errorData => {
+                        console.error("Error:", errorData);
+                        //setShowWarning(true);
+                    });
+                }
+            }).catch(error => {
+                console.error("Error:", error);
+                //setShowWarning(true);
+            });
+        } catch (error) {
+            console.error("Error:", error);
+            //setShowWarning(true);
+        }
+    }
+
+
+
 
     function obtenerPeliculasFavoritas() {
         const token = localStorage.getItem('token');
@@ -31,6 +71,7 @@ function InfoUsuario() {
             .then(data => setpeliculasFavoritas(data))
             .catch(error => console.error('Error fetching movies:', error));
     }
+
 
     const navigate = useNavigate();
     const editarPerfil = () => {
@@ -47,7 +88,7 @@ function InfoUsuario() {
             <main class="mainPerfil">
                 <div class="navPerfil">
                     <img src={imgPerfil} class="imgPerfil" alt="imgPerfil" />
-                    <p class="nombrePerfil">ANAISBT</p>
+                    <p class="nombrePerfil">{datosUsuario.username}</p>
                     <button class="btnEditarPerfil" onClick={editarPerfil}>Editar Perfil</button>
                 </div>
                 <div style={{ marginBottom: '10px' }}>

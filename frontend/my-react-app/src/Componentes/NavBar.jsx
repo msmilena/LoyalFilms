@@ -156,7 +156,7 @@ const Navbar = ({ showLoginPopup, setShowLoginPopup }) => {
             </li>
 
             <li>
-              <RouterLink to="/perfil" onClick={closeMenu}>
+              <RouterLink to="/informacionUsuario" onClick={closeMenu}>
                 Perfil
               </RouterLink>
             </li>
