@@ -10,7 +10,7 @@ from src.services.PeliculasService import PeliculasService
 main = Blueprint('movies_blueprint', __name__)
 
 
-@main.route('/tendencias', methods=['GET'])
+@main.route('/tendencias', methods=['POST'])
 def get_movies():
    # has_access = Security.verify_token(request.headers)
     #print(has_access)
