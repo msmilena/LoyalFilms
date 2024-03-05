@@ -44,7 +44,7 @@ const handleGeneroSearch = (genero) => {
   const [resultsPerPage, setResultsPerPage] = useState(12); // Resultados por página
   const [showLoginPopup, setShowLoginPopup] = useState(false);
   const [showRegisterPopup, setShowRegisterPopup] = useState(false);
-  const url = "http://127.0.0.1:5000"
+  const url = "https://loyalfilms.onrender.com"
   // Función para buscar películas por la palabra clave y página
   const buscarPeliculas = async () => {
     try {

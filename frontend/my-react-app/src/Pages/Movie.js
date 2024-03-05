@@ -44,7 +44,7 @@ function Movie() {
     const [idResenaSeleccionada, setIdResenaSeleccionar] = useState(null);
     const [idPelicula, setIdPelicula] = useState(null);
     const [resenas, setResenas] = useState([]);
-    const url = "http://127.0.0.1:5000"
+    const url = "https://loyalfilms.onrender.com"
     useEffect(() => {
         //console.log(vista);
         //console.log(favorita);

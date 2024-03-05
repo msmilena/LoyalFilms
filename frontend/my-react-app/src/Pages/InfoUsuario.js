@@ -15,7 +15,7 @@ function InfoUsuario() {
     const [peliculasFavoritas, setpeliculasFavoritas] = useState([]);
     const [idUser, setIdUsername] = useState(localStorage.getItem("idusuario") || "");
     const [datosUsuario, setDatosUsuario] = useState([]);
-    const url = "http://127.0.0.1:5000"
+    const url = "https://loyalfilms.onrender.com"
     useEffect(() => {
         obtenerDatosUsuario();
         obtenerPeliculasFavoritas();
